@@ -1,3 +1,20 @@
+# P4 - Brent Lanier - CSCI S-15 (Summer 2014)
+
+## PROD URL
+<http://p4.cscis15.lanier.us/>
+
+## P4 Description
+
+
+
+## Details for Instructor(s)
+
+
+## Outside code
+* jQuery:  http://jquery.com
+* Laravel:  http://laravel.com
+* Stack Overflow:  http://www.stackoverflow.com
+
 ## Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
