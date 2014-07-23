@@ -23,9 +23,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'homestead',
-			'username'  => 'homestead',
-			'password'  => 'secret',
+			'database'  => 'cscis15_p4',
+			'username'  => 'cscis15_p4',
+			'password'  => 'p@ssw0rd123',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

@@ -15,3 +15,16 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+
+Route::get('/get-environment',function() {
+
+    echo "Environment: ".App::environment();
+
+});
+
+Route::get('/trigger-error',function() {
+
+    # Class Foobar should not exist, so this should create an error
+    $foo = new Foobar;
+
+});
