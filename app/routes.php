@@ -28,3 +28,13 @@ Route::get('/trigger-error',function() {
     $foo = new Foobar;
 
 });
+
+Route::get('/mysql-test', function() {
+
+    # Use the DB component to select all the databases
+    $results = DB::select('SHOW DATABASES;');
+
+    # If the "Pre" package is not installed, you should output using print_r instead
+    return Pre::render($results);
+
+});
