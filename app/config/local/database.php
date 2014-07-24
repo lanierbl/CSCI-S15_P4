@@ -22,9 +22,9 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'cscis15_p4',
-			'username'  => 'cscis15_p4',
+			'host'      => 'mysql.lanier.us',
+			'database'  => 'cscis15_p4_dev',
+			'username'  => 'cscis15_p4_dev',
 			'password'  => 'p@ssw0rd123',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
