@@ -11,22 +11,41 @@
 |
 */
 
+Route::get('/debug', 'P4Utils@debug');
+
+Route::get('/get-environment', 'P4Utils@getEnvironment');
+
+Route::get('/trigger-error', 'P4Utils@triggerError');
+
+
+
 Route::get('/', function()
 {
-	return View::make('hello');
+    return View::make('index');
 });
 
-Route::get('/get-environment',function() {
 
-    echo "Environment: ".App::environment();
+Route::get('register', array('before' => 'guest',
+        function() {
+            return View::make('register');
+        }
+    )
+);
 
-});
 
-Route::get('/trigger-error',function() {
+Route::post('register', array('before' => 'csrf',
+                            'uses' => 'P4Security@register')
+);
 
-    # Class Foobar should not exist, so this should create an error
-    $foo = new Foobar;
+Route::get('login', array('before' => 'guest',
+        function() {
+            return View::make('login');
+        }
+    )
+);
 
-});
+Route::post('login', array('before' => 'csrf',
+                            'uses' => 'P4security@login')
+);
 
-Route::get('/debug', 'P4Utils@debug');
+Route::get('/logout', 'P4Security@logout');

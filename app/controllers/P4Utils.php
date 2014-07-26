@@ -46,4 +46,17 @@ class P4Utils extends BaseController {
         echo '</pre>';
     }
 
+
+    public function triggerError()
+    {
+        # Class Foobar should not exist, so this should create an error
+        $foo = new Foobar;
+    }
+
+
+    public function getEnvironment()
+    {
+        echo "Environment: ".App::environment();
+    }
+
 }
