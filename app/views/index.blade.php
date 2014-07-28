@@ -13,4 +13,9 @@ CSCI S-15 - Summer 2014 - Project 4
 @section('content')
 
     <h1>Welcome to P4</h1>
+
+    <a href="/mylistings">My Listings</a>
+    <br>
+    <a href="/mysearches">My Searches</a>
+
 @stop

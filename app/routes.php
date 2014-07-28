@@ -49,6 +49,22 @@ Route::post('search', array('before' => 'auth',
         'uses' => 'P4Logic@search')
 );
 
+Route::get('/mylistings', array('before' => 'auth',
+        function() {
+            $listings = Auth::user()->listings()->get();
+            return View::make('mylistings', array('listings' => $listings));
+        }
+    )
+);
+
+Route::get('/mysearches', array('before' => 'auth',
+        function() {
+            $searches = Auth::user()->searches()->get();
+            return View::make('mysearches', array('searches' => $searches));
+        }
+    )
+);
+
 
 /*
 |--------------------------------------------------------------------------

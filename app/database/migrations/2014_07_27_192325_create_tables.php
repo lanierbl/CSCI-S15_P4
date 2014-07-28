@@ -40,14 +40,14 @@ class CreateTables extends Migration {
             $table->text('desc');
             $table->string('addr_street');
             $table->string('addr_city');
-            $table->char('addr_state');
-            $table->integer('addr_zip');
-            $table->integer('num_bed');
-            $table->integer('num_bath');
-            $table->integer('num_halfbath');
-            $table->integer('sqrfoot');
-            $table->integer('lot_sqrfoot');
-            $table->integer('park_spaces');
+            $table->char('addr_state', 2);
+            $table->unsignedInteger('addr_zip');
+            $table->unsignedInteger('num_bed');
+            $table->unsignedInteger('num_bath');
+            $table->unsignedInteger('num_halfbath');
+            $table->unsignedInteger('sqrfoot');
+            $table->unsignedInteger('lot_sqrfoot');
+            $table->unsignedInteger('park_spaces');
             $table->boolean('garage');
             $table->boolean('pool');
             $table->string('pic1');
@@ -63,12 +63,26 @@ class CreateTables extends Migration {
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('home_id');
             $table->string('status');
-            $table->integer('price');
+            $table->unsignedInteger('price');
             $table->date('listing_date');
             $table->date('status_date');
             // Foreign Keys
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('home_id')->references('id')->on('homes');
+        });
+
+        Schema::create('searches', function($table) {
+            $table->engine = "InnoDB";
+            //  Primary Key
+            $table->increments('id');
+            //  Table Timestamps - created_by, updated_at columns
+            $table->timestamps();
+            //  Home Attributes
+            $table->unsignedInteger('user_id');
+            $table->string('name');
+            $table->text('searchValJSON');
+            // Foreign Keys
+            $table->foreign('user_id')->references('id')->on('users');
         });
 
 	}
@@ -83,6 +97,7 @@ class CreateTables extends Migration {
         Schema::drop('users');
         Schema::drop('homes');
         Schema::drop('listings');
+        Schema::drop('searches');
 	}
 
 }

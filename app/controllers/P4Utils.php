@@ -151,8 +151,8 @@ class P4Utils extends BaseController {
         $listing->save();
 
         $listing = new Listing;
-        $listing->user_id = 99;
-        $listing->home_id = 3;
+        $listing->user_id = 2;
+        $listing->home_id = 2;
         $listing->status = 'Active';
         $listing->price = 1495000;
         $listing->listing_date = '2014-06-01';
