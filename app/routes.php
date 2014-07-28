@@ -4,25 +4,15 @@
 |--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
 */
-
-Route::get('/debug', 'P4Utils@debug');
-
-Route::get('/get-environment', 'P4Utils@getEnvironment');
-
-Route::get('/trigger-error', 'P4Utils@triggerError');
-
-
 
 Route::get('/', function()
 {
     return View::make('index');
 });
+
+
+Route::get('/logout', 'P4Security@logout');
 
 
 Route::get('register', array('before' => 'guest',
@@ -44,8 +34,33 @@ Route::get('login', array('before' => 'guest',
     )
 );
 
+
 Route::post('login', array('before' => 'csrf',
                             'uses' => 'P4security@login')
 );
 
-Route::get('/logout', 'P4Security@logout');
+
+Route::get('search', function()
+{
+    return View::make('search');
+});
+
+Route::post('search', array('before' => 'auth',
+        'uses' => 'P4Logic@search')
+);
+
+
+/*
+|--------------------------------------------------------------------------
+| Utility / Testing Routes
+|--------------------------------------------------------------------------
+*/
+
+
+Route::get('/debug', 'P4Utils@debug');
+
+Route::get('/get-environment', 'P4Utils@getEnvironment');
+
+Route::get('/trigger-error', 'P4Utils@triggerError');
+
+Route::get('/refreshDB', 'P4Utils@refreshDB');

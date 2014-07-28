@@ -5,8 +5,11 @@ class P4Security extends BaseController {
     public function register()
     {
         $user = new User;
-        $user->email    = Input::get('email');
+        $user->username    = Input::get('username');
         $user->password = Hash::make(Input::get('password'));
+        $user->first_name = Input::get('first_name');
+        $user->last_name = Input::get('last_name');
+        $user->email    = Input::get('email');
 
         # Try to add the user
         try {
@@ -25,7 +28,7 @@ class P4Security extends BaseController {
 
     public function login()
     {
-        $credentials = Input::only('email', 'password');
+        $credentials = Input::only('username', 'password');
 
         if (Auth::attempt($credentials, $remember = true)) {
             return Redirect::intended('/')->with('flash_message', 'Welcome Back!');

@@ -23,7 +23,7 @@
     @endif
 
     @if(Auth::check())
-    <a href='/logout'>Log out {{ Auth::user()->email; }}</a>
+    <a href='/logout'>Log out: {{ Auth::user()->first_name; }}</a>
     @else
     <a href='/register'>Register</a> or <a href='/login'>Log in</a>
     @endif

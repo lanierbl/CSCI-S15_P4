@@ -13,8 +13,11 @@ class CreateTables extends Migration {
 	public function up()
 	{
         Schema::create('users', function($table) {
+            $table->engine = "InnoDB";
             //  Primary Key
             $table->increments('id');
+            //  Table Timestamps - created_by, updated_at columns
+            $table->timestamps();
             //  User Attributes
             $table->string('username');
             $table->string('password');
@@ -23,12 +26,15 @@ class CreateTables extends Migration {
             $table->string('first_name');
             $table->string('last_name');
             $table->boolean('admin');
-            $table->timestamps();
+
         });
 
         Schema::create('homes', function($table) {
+            $table->engine = "InnoDB";
             //  Primary Key
             $table->increments('id');
+            //  Table Timestamps - created_by, updated_at columns
+            $table->timestamps();
             //  Home Attributes
             $table->string('style');
             $table->text('desc');
@@ -45,7 +51,24 @@ class CreateTables extends Migration {
             $table->boolean('garage');
             $table->boolean('pool');
             $table->string('pic1');
+        });
+
+        Schema::create('listings', function($table) {
+            $table->engine = "InnoDB";
+            //  Primary Key
+            $table->increments('id');
+            //  Table Timestamps - created_by, updated_at columns
             $table->timestamps();
+            //  Home Attributes
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('home_id');
+            $table->string('status');
+            $table->integer('price');
+            $table->date('listing_date');
+            $table->date('status_date');
+            // Foreign Keys
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('home_id')->references('id')->on('homes');
         });
 
 	}
@@ -59,6 +82,7 @@ class CreateTables extends Migration {
 	{
         Schema::drop('users');
         Schema::drop('homes');
+        Schema::drop('listings');
 	}
 
 }

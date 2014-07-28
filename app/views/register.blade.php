@@ -16,8 +16,17 @@ Registration
 
     {{ Form::open(array('url' => '/register')) }}
 
+        First Name<br>
+        {{ Form::text('first_name') }}<br><br>
+
+        Last Name<br>
+        {{ Form::text('last_name') }}<br><br>
+
         Email<br>
         {{ Form::text('email') }}<br><br>
+
+        Username<br>
+        {{ Form::text('username') }}<br><br>
 
         Password:<br>
         {{ Form::password('password') }}<br><br>
