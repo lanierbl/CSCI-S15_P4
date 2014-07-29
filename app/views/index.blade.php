@@ -17,5 +17,7 @@ CSCI S-15 - Summer 2014 - Project 4
     <a href="/mylistings">My Listings</a>
     <br>
     <a href="/mysearches">My Searches</a>
+    <br>
+    <a href="/search">Search for Homes</a>
 
 @stop

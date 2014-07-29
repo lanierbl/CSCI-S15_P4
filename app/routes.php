@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Application Routes
+| Authentication / Login / Registration Routes
 |--------------------------------------------------------------------------
 */
 
@@ -10,7 +10,6 @@ Route::get('/', function()
 {
     return View::make('index');
 });
-
 
 Route::get('/logout', 'P4Security@logout');
 
@@ -21,7 +20,6 @@ Route::get('register', array('before' => 'guest',
         }
     )
 );
-
 
 Route::post('register', array('before' => 'csrf',
                             'uses' => 'P4Security@register')
@@ -34,20 +32,24 @@ Route::get('login', array('before' => 'guest',
     )
 );
 
-
 Route::post('login', array('before' => 'csrf',
                             'uses' => 'P4security@login')
 );
 
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+*/
 
-Route::get('search', function()
-{
-    return View::make('search');
-});
-
-Route::post('search', array('before' => 'auth',
-        'uses' => 'P4Logic@search')
+Route::get('/search', array('before' => 'auth',
+        function() {
+            return View::make('search');
+        }
+    )
 );
+
+Route::post('search', 'P4Logic@search');
 
 Route::get('/mylistings', array('before' => 'auth',
         function() {
@@ -65,10 +67,52 @@ Route::get('/mysearches', array('before' => 'auth',
     )
 );
 
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+*/
+
+
+Route::get('/api/get_states', array('before' => 'auth',
+        function() {
+            $states = DB::table('homes')->distinct()->lists('addr_state');
+            return Response::make($states);
+        }
+    )
+);
+
+
+Route::get('/api/get_cities', array('before' => 'auth',
+        function() {
+            $state = Input::get('option');
+            $cities = DB::table('homes')->where('addr_state', '=', $state)->distinct()->lists('addr_city');
+            return Response::make($cities);
+        }
+    )
+);
+
+Route::get('/api/get_styles', array('before' => 'auth',
+        function() {
+            $styles = DB::table('homes')->distinct()->lists('style');
+            return Response::make($styles);
+        }
+    )
+);
+
 
 /*
 |--------------------------------------------------------------------------
-| Utility / Testing Routes
+| Testing Routes
+|--------------------------------------------------------------------------
+*/
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Utility Routes
 |--------------------------------------------------------------------------
 */
 
@@ -80,3 +124,8 @@ Route::get('/get-environment', 'P4Utils@getEnvironment');
 Route::get('/trigger-error', 'P4Utils@triggerError');
 
 Route::get('/refreshDB', 'P4Utils@refreshDB');
+
+Route::get('/practice', function()
+{
+    echo 'Hello World!';
+});

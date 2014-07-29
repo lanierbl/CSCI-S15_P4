@@ -5,12 +5,12 @@
 @stop
 
 @section('head')
+
 @stop
 
 @section('content')
 
     <h1>THIS IS A TEST PAGE</h1><br>
-
 
 
 @stop

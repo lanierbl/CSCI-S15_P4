@@ -5,7 +5,7 @@ Search
 @stop
 
 @section('head')
-
+    {{ HTML::script('scripts/search.js') }}
 @stop
 
 @section('content')
@@ -14,34 +14,45 @@ Search
 
     <h1>Search</h1>
 
-    {{ Form::open(array('url' => '/search')) }}
+    {{ Form::open(array('action' => 'P4Logic@search')) }}
 
-        Style<br>
-        {{ Form::text('username') }}<br><br>
+        State:
+        <select id="state" name="state">
+        </select>
+        <br><br>
+        City:
+        <select id="city" name="city">
+            <option>Select State First</option>
+        </select>
+        <br><br>
+        Style:
+        <select id="style" name="style">
+        </select>
+        <br><br>
 
-        Password:<br>
-        {{ Form::password('password') }}<br><br>
+        Bedrooms:
+        {{ Form::selectRange('num_bed', 1, 4) }}<br><br>
+
+        Bathrooms:
+        {{ Form::selectRange('num_bath', 1, 3) }}<br><br>
+
+        Half Bathrooms:
+        {{ Form::selectRange('num_halfbath', 0, 2) }}<br><br>
+
+        Parking Spaces:
+        {{ Form::selectRange('park_spaces', 1, 4) }}<br><br>
+
+        Square Foot:
+        {{ Form::select('sqrfoot', array('1500' => '<1500', '2500' => '1500 - 2500', '2501' => '>2500')) }}<br><br>
+
+        Lot Square Foot:
+        {{ Form::select('lot_sqrfoot', array('10K' => '<10K', '40K' => '10K - 40K', '41K' => '>40K')) }}<br><br>
 
         Garage:
-        {{ Form::checkbox('garage', 'T') }}<br><br>
+        {{ Form::checkbox('garage', 'true') }}<br><br>
 
         Pool:
-        {{ Form::checkbox('pool', 'T') }}<br><br>
-
-
-        $home->style = 'Condo';
-
-        $home->addr_city = 'Boston';
-        $home->addr_state = 'MA';
-
-        $home->num_bed = 2;
-        $home->num_bath = 1;
-        $home->num_halfbath = 1;
-        $home->sqrfoot = 1850;
-        $home->lot_sqrfoot = 0;
-        $home->park_spaces = 0;
-
-
+        {{ Form::checkbox('pool', 'true') }}<br><br>
 
         {{ Form::submit('Submit') }}
 
