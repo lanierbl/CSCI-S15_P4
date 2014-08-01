@@ -85,6 +85,17 @@ class CreateTables extends Migration {
             $table->foreign('user_id')->references('id')->on('users');
         });
 
+        Schema::create('labels', function($table) {
+            $table->engine = "InnoDB";
+            //  Primary Key
+            $table->increments('id');
+            //  Table Timestamps - created_by, updated_at columns
+            $table->timestamps();
+            //  Home Attributes
+            $table->string('type');
+            $table->string('value');
+        });
+
 	}
 
 	/**
@@ -98,6 +109,7 @@ class CreateTables extends Migration {
         Schema::drop('homes');
         Schema::drop('listings');
         Schema::drop('searches');
+        Schema::drop('labels');
 	}
 
 }

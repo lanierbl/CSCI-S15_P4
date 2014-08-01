@@ -70,10 +70,11 @@ class P4Utils extends BaseController {
         DB::statement('TRUNCATE homes');
         echo "TRUNCATE 'listings' table"."</br>";
         DB::statement('TRUNCATE listings');
-        //echo "TRUNCATE 'searches' table"."</br>";
-        //DB::statement('TRUNCATE searches');
+        echo "TRUNCATE 'searches' table"."</br>";
+        DB::statement('TRUNCATE searches');
+        echo "TRUNCATE 'labels' table"."</br>";
+        DB::statement('TRUNCATE labels');
         DB::statement('SET FOREIGN_KEY_CHECKS=1'); # Disable FK constraints so that all rows can be deleted, even if there's an associated FK
-
 
         // New Admin User
         echo "<br><br>"."Saving Admin User: <b>'blanier'</b>"."<br>";
@@ -99,8 +100,50 @@ class P4Utils extends BaseController {
         // Save Listing User
         $user->save();
 
+        // New Label seed data
+        echo "<br><br>"."Saving seed data for <b>'Label'</b> objects"."<br>";
+        $label = new Label;
+        $label->type = 'state';
+        $label->value = 'MA';
+        $label->save();
+
+        $label = new Label;
+        $label->type = 'city';
+        $label->value = 'Boston';
+        $label->save();
+
+        $label = new Label;
+        $label->type = 'city';
+        $label->value = 'Cambridge';
+        $label->save();
+
+        $label = new Label;
+        $label->type = 'city';
+        $label->value = 'Arlington';
+        $label->save();
+
+        $label = new Label;
+        $label->type = 'city';
+        $label->value = 'Brookline';
+        $label->save();
+
+        $label = new Label;
+        $label->type = 'style';
+        $label->value = 'Colonial';
+        $label->save();
+
+        $label = new Label;
+        $label->type = 'style';
+        $label->value = 'Ranch';
+        $label->save();
+
+        $label = new Label;
+        $label->type = 'style';
+        $label->value = 'Condo';
+        $label->save();
+
         // New Home seed data
-        echo "<br><br>"."Saving seed data for <b>'Home'</b> objects"."<br>";
+        echo "<br>"."Saving seed data for <b>'Home'</b> objects"."<br>";
         $home = new Home;
         $home->style = 'Colonial';
         $home->desc = 'A fine home in the center of Cambridge.';

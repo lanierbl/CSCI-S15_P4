@@ -94,7 +94,7 @@ Route::get('/my/searches', array('before' => 'auth',
 
 Route::get('/api/get_states',
         function() {
-            $states = DB::table('homes')->distinct()->lists('addr_state');
+            $states = DB::table('labels')->where('type', '=', 'state')->distinct()->lists('value');
             return Response::make($states);
         }
 );
@@ -103,14 +103,14 @@ Route::get('/api/get_states',
 Route::get('/api/get_cities',
         function() {
             $state = Input::get('option');
-            $cities = DB::table('homes')->where('addr_state', '=', $state)->distinct()->lists('addr_city');
+            $cities = DB::table('labels')->where('type', '=', 'city')->distinct()->lists('value', 'value');
             return Response::make($cities);
         }
 );
 
 Route::get('/api/get_styles',
         function() {
-            $styles = DB::table('homes')->distinct()->lists('style');
+            $styles = DB::table('labels')->where('type', '=', 'style')->distinct()->lists('value');;
             return Response::make($styles);
         }
 );

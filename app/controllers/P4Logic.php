@@ -4,15 +4,18 @@ class P4Logic extends BaseController {
 
     public function search($searchID = null)
     {
-        $state_options = array('Select State' => 'Select State') + DB::table('homes')->distinct()->lists('addr_state', 'addr_state');
-        $city_options = array('Select City' => 'Select City') + DB::table('homes')->distinct()->lists('addr_city', 'addr_city');
-        $style_options = array('Select Style' => 'Select Style') + DB::table('homes')->distinct()->lists('style', 'style');
+        $state_options = array('Select State' => 'Select State') + DB::table('labels')->where('type', '=', 'state')->distinct()->lists('value', 'value');
+        $city_options = array('Select City' => 'Select City') + DB::table('labels')->where('type', '=', 'city')->distinct()->lists('value', 'value');
+        $style_options = array('Select Style' => 'Select Style') + DB::table('labels')->where('type', '=', 'style')->distinct()->lists('value', 'value');
+        $searchValJSON = null;
         if ($searchID != null) {
             $search = Search::find($searchID);
             $searchValJSON = $search->searchValJSON;
-            return View::make('search', array('state_options' => $state_options, 'city_options' => $city_options, 'style_options' => $style_options, 'searchJSON' => $searchValJSON));
             }
-        return View::make('search', array('state_options' => $state_options, 'city_options' => $city_options, 'style_options' => $style_options));
+        return View::make('search', array('state_options' => $state_options,
+                                          'city_options' => $city_options,
+                                          'style_options' => $style_options,
+                                          'searchJSON' => $searchValJSON));
     }
 
 

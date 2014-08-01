@@ -6,18 +6,9 @@ Search
 
 @section('head')
     {{ HTML::script('scripts/search.js') }}
-    {{ HTML::script('scripts/jquery.loadJSON.js') }}
-
 @stop
 
 @section('content')
-
-    <script type="text/javascript">
-
-        var json = <?php echo $searchJSON; ?>;
-        alert(JSON.stringify(json));
-        $('fieldset#search_form').loadJSON(json);
-    </script>
 
     <h1>Search</h1>
 
@@ -77,5 +68,27 @@ Search
         </div> <!-- /results-div -->
 
     </div> <!-- /container -->
+
+    <script type="text/javascript">
+        var searchJSON = <?php echo $searchJSON; ?>;
+
+        $.each(searchJSON, function(name, val) {
+            //alert('Name = ' + name + ', Value = ' + val);
+            var $el = $('[name="' + name + '"]'),
+                type = $el.attr('type');
+
+            switch (type) {
+                case 'checkbox':
+                    $el.attr('checked', 'checked');
+                    break;
+                case 'radio':
+                    $el.filter('[value="' + val + '"]').attr('checked', 'checked');
+                    break;
+                default:
+                    $el.val(val);
+            }
+        });
+
+    </script>
 
 @stop
