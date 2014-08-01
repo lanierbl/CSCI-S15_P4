@@ -11,6 +11,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
     <!-- jQuery UI CSS -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
+    <!-- Site Style CSS -->
+    {{ HTML::style('css/style.css') }}
 
     @yield('head')
 
@@ -27,6 +29,8 @@
     @else
     <a href='/register'>Register</a> or <a href='/login'>Log in</a>
     @endif
+    <br>
+    <a href='/'>Home</a>
 
     @yield('content')
 

@@ -17,8 +17,8 @@
 
 
          @foreach($searches as $s)
-             <p>Search ID:  {{ $s->id }}</p>
-             <p>Search Name:  {{ $s->name }}</p>
+             <p>Search ID:  <a href="/search/{{ $s->id }}">{{ $s->id }}</a></p>
+             <p>Search Name:  {{ $s->name }}   <a href="/search/delete/{{ $s->id }}">Delete</a></p>
              <br>
          @endforeach
 

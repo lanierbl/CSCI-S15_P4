@@ -1,0 +1,14 @@
+/* Space out content a bit */
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.search_div {
+    padding-right: 15px;
+    float: left;
+}
+
+.results_div {
+    padding-left: 15px;
+}

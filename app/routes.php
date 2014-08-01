@@ -42,16 +42,33 @@ Route::post('login', array('before' => 'csrf',
 |--------------------------------------------------------------------------
 */
 
-Route::get('/search', array('before' => 'auth',
+Route::get('/home/list', array('before' => 'auth',
         function() {
-            return View::make('search');
+            return View::make('newlisting');
         }
     )
 );
 
-Route::post('search', 'P4Logic@search');
+Route::get('/home/detail/{homeID}', array('before' => 'auth',
+        'uses' => 'P4Logic@home_detail')
+);
 
-Route::get('/mylistings', array('before' => 'auth',
+
+Route::get('/search/{searchID?}', 'P4Logic@search');
+
+
+Route::post('/search/do', 'P4Logic@search_do');
+
+
+Route::post('/search/save', 'P4Logic@search_save');
+
+
+Route::get('/search/delete/{searchID}', array('before' => 'auth',
+                                        'uses' => 'P4Logic@search_delete')
+);
+
+
+Route::get('/my/listings', array('before' => 'auth',
         function() {
             $listings = Auth::user()->listings()->get();
             return View::make('mylistings', array('listings' => $listings));
@@ -59,7 +76,8 @@ Route::get('/mylistings', array('before' => 'auth',
     )
 );
 
-Route::get('/mysearches', array('before' => 'auth',
+
+Route::get('/my/searches', array('before' => 'auth',
         function() {
             $searches = Auth::user()->searches()->get();
             return View::make('mysearches', array('searches' => $searches));
@@ -74,30 +92,27 @@ Route::get('/mysearches', array('before' => 'auth',
 */
 
 
-Route::get('/api/get_states', array('before' => 'auth',
+Route::get('/api/get_states',
         function() {
             $states = DB::table('homes')->distinct()->lists('addr_state');
             return Response::make($states);
         }
-    )
 );
 
 
-Route::get('/api/get_cities', array('before' => 'auth',
+Route::get('/api/get_cities',
         function() {
             $state = Input::get('option');
             $cities = DB::table('homes')->where('addr_state', '=', $state)->distinct()->lists('addr_city');
             return Response::make($cities);
         }
-    )
 );
 
-Route::get('/api/get_styles', array('before' => 'auth',
+Route::get('/api/get_styles',
         function() {
             $styles = DB::table('homes')->distinct()->lists('style');
             return Response::make($styles);
         }
-    )
 );
 
 

@@ -23,7 +23,7 @@ class P4Security extends BaseController {
         # Log the user in
         Auth::login($user);
 
-        return Redirect::to('/')->with('flash_message', 'Welcome to Foobooks!');
+        return Redirect::to('/')->with('flash_message', 'Welcome to House Hunters!');
     }
 
     public function login()

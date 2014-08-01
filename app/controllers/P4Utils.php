@@ -139,6 +139,25 @@ class P4Utils extends BaseController {
         // Save Home seed data
         $home->save();
 
+        $home = new Home;
+        $home->style = 'Ranch';
+        $home->desc = 'Charming ranch near Harvard University';
+        $home->addr_street = '200 Ash Street';
+        $home->addr_city = 'Cambridge';
+        $home->addr_state = 'MA';
+        $home->addr_zip = 2138;
+        $home->num_bed = 3;
+        $home->num_bath = 2;
+        $home->num_halfbath = 1;
+        $home->sqrfoot = 1975;
+        $home->lot_sqrfoot = 6500;
+        $home->park_spaces = 0;
+        $home->garage = true;
+        $home->pool = false;
+        $home->pic1 = '';
+        // Save Home seed data
+        $home->save();
+
         // New Listing seed data
         echo "<br>"."Saving seed data for <b>'Listing'</b> objects"."<br>";
         $listing = new Listing;
@@ -157,6 +176,15 @@ class P4Utils extends BaseController {
         $listing->price = 1495000;
         $listing->listing_date = '2014-06-01';
         $listing->status_date = '2014-06-01';
+        $listing->save();
+
+        $listing = new Listing;
+        $listing->user_id = 2;
+        $listing->home_id = 3;
+        $listing->status = 'Active';
+        $listing->price = 799500;
+        $listing->listing_date = '2014-02-15';
+        $listing->status_date = '2014-02-15';
         $listing->save();
     }
 

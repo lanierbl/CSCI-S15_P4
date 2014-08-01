@@ -1,8 +1,6 @@
 $(document).ready(function($){
 
-
-
-     $("#submit").click(function() {
+    $("#submit").click(function() {
         //Set form variables to be sent via JSON
 
         var proceed = true;
@@ -66,10 +64,10 @@ $(document).ready(function($){
                 output = '<div class="success">'
                 for (i = 0; i < response.results.length; i++) {
                     output += "<b>Address</b> " + "<a href=/home/detail/" + response.results[i].id + ">" +
-                                                     response.results[i].addr_street + ", " +
-                                                     response.results[i].addr_city + ", " +
-                                                     response.results[i].addr_state + "  " +
-                                                     response.results[i].addr_zip + "</a><br/>";
+                        response.results[i].addr_street + ", " +
+                        response.results[i].addr_city + ", " +
+                        response.results[i].addr_state + "  " +
+                        response.results[i].addr_zip + "</a><br/>";
                     output += "<b>Bedrooms: </b>: " + response.results[i].num_bed + "<br/>";
                     output += "<b>Bathrooms: </b>: " + response.results[i].num_bath + "<br/>";
                     output += "<br/>";
@@ -91,7 +89,5 @@ $(document).ready(function($){
     $("#city").change(function() {
         $('select[name=city]').css('border-color','');
     });
-
-
 
 });
