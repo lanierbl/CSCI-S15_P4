@@ -7,7 +7,7 @@
 @section('head')
 @stop
 
-@section('content')
+@section('body')
 
     <h1>My Listings</h1>
 
@@ -22,4 +22,7 @@
         <br>
     @endforeach
 
+@stop
+
+@section('scripts')
 @stop

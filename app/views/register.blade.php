@@ -8,7 +8,7 @@ Registration
 
 @stop
 
-@section('content')
+@section('body')
 
     <!-- /app/views/register.blade.php -->
 
@@ -35,4 +35,7 @@ Registration
 
     {{ Form::close() }}
 
+@stop
+
+@section('scripts')
 @stop

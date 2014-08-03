@@ -1,45 +1,5 @@
 $(document).ready(function($){
 
-/*
-    $.ajax({
-        url: 'api/get_states',
-        success: function(data) {
-            var state = $('#state');
-            state.empty();
-            state.append('<option>Select State</option>');
-            $.each(data, function(index, value) {
-                state.append("<option value='"+ value +"'>" + value + "</option>");
-            });
-        }
-    });
-
-    $.ajax({
-        url: 'api/get_styles',
-        success: function(data) {
-            var style = $('#style');
-            style.empty();
-            style.append('<option>Select Style</option>');
-            $.each(data, function(index, value) {
-                style.append("<option value='"+ value +"'>" + value + "</option>");
-            });
-        }
-    });
-
-    $('#state').change(function(){
-        $.get('api/get_cities',
-            { option: $(this).val() },
-            function(data) {
-                var city = $('#city');
-                city.empty();
-                city.append('<option>Select City</option>');
-                $.each(data, function(index, value) {
-                    city.append("<option value='"+ value +"'>" + value + "</option>");
-                });
-            });
-    });
-*/
-
-
     $("#submit").click(function() {
         //Set form variables to be sent via JSON
 
@@ -61,43 +21,45 @@ $(document).ready(function($){
             var json_obj = JSON.parse( '{}' );
 
             json_obj['state'] = document.getElementById("state").value;
-            json_obj['city'] = (document.getElementById("city").value);
+            json_obj['city'] = document.getElementById("city").value;
 
-            if (document.getElementById("style").value != "Select Style") {
-                json_obj['style'] = (document.getElementById("style").value);
-            }
-            if (document.getElementById("num_bed").value != "") {
-                json_obj['num_bed'] = (document.getElementById("num_bed").value);
-            }
-            if (document.getElementById("num_bath").value != "") {
-                json_obj['num_bath'] = (document.getElementById("num_bath").value);
-            }
-            if (document.getElementById("num_halfbath").value != "") {
-                json_obj['num_halfbath'] = (document.getElementById("num_halfbath").value);
-            }
-            if (document.getElementById("park_spaces").value != "") {
-                json_obj['park_spaces'] = (document.getElementById("park_spaces").value);
-            }
-            if (document.getElementById("sqrfoot").value != "") {
-                json_obj['sqrfoot'] = (document.getElementById("sqrfoot").value);
-            }
-            if (document.getElementById("lot_sqrfoot").value != "") {
-                json_obj['lot_sqrfoot'] = (document.getElementById("lot_sqrfoot").value);
-            }
-            if (document.getElementById("garage") != null)
-                if (document.getElementById("garage").checked) {
-                    json_obj['garage'] = 'true';
+            if (document.getElementById("guest").value == 'false') {
+                if (document.getElementById("style").value != "Select Style") {
+                    json_obj['style'] = (document.getElementById("style").value);
                 }
-            if (document.getElementById("pool") != null)
-                if (document.getElementById("pool").checked) {
-                    json_obj['pool'] = 'true';
+                if (document.getElementById("num_bed").value != "") {
+                    json_obj['num_bed'] = (document.getElementById("num_bed").value);
                 }
-            // Save search if desired
-            if ($('#searchName').val() != "") {
-                var search_obj = JSON.parse( '{}' );
-                search_obj['searchName'] = $('#searchName').val();
-                search_obj['searchString'] = json_obj;
-                $.post('/search/save', search_obj);
+                if (document.getElementById("num_bath").value != "") {
+                    json_obj['num_bath'] = (document.getElementById("num_bath").value);
+                }
+                if (document.getElementById("num_halfbath").value != "") {
+                    json_obj['num_halfbath'] = (document.getElementById("num_halfbath").value);
+                }
+                if (document.getElementById("park_spaces").value != "") {
+                    json_obj['park_spaces'] = (document.getElementById("park_spaces").value);
+                }
+                if (document.getElementById("sqrfoot").value != "") {
+                    json_obj['sqrfoot'] = (document.getElementById("sqrfoot").value);
+                }
+                if (document.getElementById("lot_sqrfoot").value != "") {
+                    json_obj['lot_sqrfoot'] = (document.getElementById("lot_sqrfoot").value);
+                }
+                if (document.getElementById("garage") != null)
+                    if (document.getElementById("garage").checked) {
+                        json_obj['garage'] = 'true';
+                    }
+                if (document.getElementById("pool") != null)
+                    if (document.getElementById("pool").checked) {
+                        json_obj['pool'] = 'true';
+                    }
+                // Save search if desired
+                if ($('#searchName').val() != "") {
+                    var search_obj = JSON.parse( '{}' );
+                    search_obj['searchName'] = $('#searchName').val();
+                    search_obj['searchString'] = json_obj;
+                    $.post('/search/save', search_obj);
+                }
             }
 
             $.post('/search/do', json_obj, function(response) {

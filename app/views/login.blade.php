@@ -8,7 +8,7 @@ Sign-up
 
 @stop
 
-@section('content')
+@section('body')
 
     <!-- /app/views/login.blade.php -->
 
@@ -26,4 +26,7 @@ Sign-up
 
     {{ Form::close() }}
 
+@
+
+@section('scripts')
 @stop

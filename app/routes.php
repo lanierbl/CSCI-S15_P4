@@ -49,9 +49,7 @@ Route::get('/home/list', array('before' => 'auth',
     )
 );
 
-Route::get('/home/detail/{homeID}', array('before' => 'auth',
-        'uses' => 'P4Logic@home_detail')
-);
+Route::get('/home/detail/{homeID}', 'P4Logic@home_detail');
 
 
 Route::get('/search/{searchID?}', 'P4Logic@search');
@@ -85,6 +83,11 @@ Route::get('/my/searches', array('before' => 'auth',
     )
 );
 
+
+Route::get('/admin', array('before' => 'auth',
+        'uses' => 'P4Logic@admin')
+);
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -94,7 +97,7 @@ Route::get('/my/searches', array('before' => 'auth',
 
 Route::get('/api/get_states',
         function() {
-            $states = DB::table('labels')->where('type', '=', 'state')->distinct()->lists('value');
+            $states = DB::table('labels')->where('type', '=', 'state')->orderBy('value', 'asc')->distinct()->lists('value');
             return Response::make($states);
         }
 );
@@ -103,14 +106,14 @@ Route::get('/api/get_states',
 Route::get('/api/get_cities',
         function() {
             $state = Input::get('option');
-            $cities = DB::table('labels')->where('type', '=', 'city')->distinct()->lists('value', 'value');
+            $cities = DB::table('labels')->where('type', '=', 'city')->orderBy('value', 'asc')->distinct()->lists('value', 'value');
             return Response::make($cities);
         }
 );
 
 Route::get('/api/get_styles',
         function() {
-            $styles = DB::table('labels')->where('type', '=', 'style')->distinct()->lists('value');;
+            $styles = DB::table('labels')->where('type', '=', 'style')->orderBy('value', 'asc')->distinct()->lists('value');;
             return Response::make($styles);
         }
 );

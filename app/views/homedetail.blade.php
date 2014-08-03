@@ -7,7 +7,7 @@
 @section('head')
 @stop
 
-@section('content')
+@section('body')
 
     <h1>Home Detail</h1>
 
@@ -15,4 +15,7 @@
     <p>City:  {{ $home->addr_city }}</p>
     <br>
 
+@stop
+
+@section('scripts')
 @stop

@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
 
     <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- jQuery UI -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
-    <!-- jQuery UI CSS -->
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
+    {{ HTML::script('scripts/jquery-1.11.1.min.js') }}
+    <!-- Bootstrap -->
+    {{ HTML::script('scripts/bootstrap.min.js') }}
+
+    <!-- Bootstrap CSS -->
+    {{ HTML::style('css/bootstrap.min.css') }}
     <!-- Site Style CSS -->
     {{ HTML::style('css/style.css') }}
 
@@ -20,21 +23,27 @@
 
 <body>
 
-    @if(Session::get('flash_message'))
-        <div class='flash-message'>{{ Session::get('flash_message') }}</div>
-    @endif
+    <div class="container">
 
-    @if(Auth::check())
-    <a href='/logout'>Log out: {{ Auth::user()->first_name; }}</a>
-    @else
-    <a href='/register'>Register</a> or <a href='/login'>Log in</a>
-    @endif
-    <br>
-    <a href='/'>Home</a>
+        @if(Session::get('flash_message'))
+            <div class='flash-message'>{{ Session::get('flash_message') }}</div>
+        @endif
 
-    @yield('content')
+        @if(Auth::check())
+        <a href='/logout'>Log out: {{ Auth::user()->first_name; }}</a>
+        @else
+        <a href='/register'>Register</a> or <a href='/login'>Log in</a>
+        @endif
+        <br>
+        <a href='/'>Home</a>
 
-    @yield('body')
+        @yield('content')
+
+        @yield('body')
+
+    </div>
+
+    @yield('scripts')
 
 </body>
 

@@ -4,10 +4,10 @@ class P4Logic extends BaseController {
 
     public function search($searchID = null)
     {
-        $state_options = array('Select State' => 'Select State') + DB::table('labels')->where('type', '=', 'state')->distinct()->lists('value', 'value');
-        $city_options = array('Select City' => 'Select City') + DB::table('labels')->where('type', '=', 'city')->distinct()->lists('value', 'value');
-        $style_options = array('Select Style' => 'Select Style') + DB::table('labels')->where('type', '=', 'style')->distinct()->lists('value', 'value');
-        $searchValJSON = null;
+        $state_options = array('Select State' => 'Select State') + DB::table('labels')->where('type', '=', 'state')->orderBy('value', 'asc')->distinct()->lists('value', 'value');
+        $city_options = array('Select City' => 'Select City') + DB::table('labels')->where('type', '=', 'city')->orderBy('value', 'asc')->distinct()->lists('value', 'value');
+        $style_options = array('Select Style' => 'Select Style') + DB::table('labels')->where('type', '=', 'style')->orderBy('value', 'asc')->distinct()->lists('value', 'value');
+        $searchValJSON = "'none'";
         if ($searchID != null) {
             $search = Search::find($searchID);
             $searchValJSON = $search->searchValJSON;
@@ -124,6 +124,14 @@ class P4Logic extends BaseController {
     {
         $home = Home::find($homeID);
         return View::make('homedetail', array('home' => $home));
+    }
+
+    public function admin()
+    {
+        if (Auth::user()->admin) {
+            return View::make('admin');
+        }
+        return Redirect::to('/')->with('flash_message', 'Not an Admin of P4 Site!');
     }
 
 }

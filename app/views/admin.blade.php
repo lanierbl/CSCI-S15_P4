@@ -1,7 +1,7 @@
 @extends('_master')
 
 @section('title')
-    TEST Page
+    Admin Page
 @stop
 
 @section('head')
@@ -9,7 +9,7 @@
 
 @section('body')
 
-    <h1>THIS IS A TEST PAGE</h1><br>
+    <h1>Admin Page</h1>
 
 @stop
 
