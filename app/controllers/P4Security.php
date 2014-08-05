@@ -17,13 +17,13 @@ class P4Security extends BaseController {
         }
             # Fail
         catch (Exception $e) {
-            return Redirect::to('/register')->with('flash_message', 'Registration failed; please try again.')->withInput();
+            return Redirect::to('/register')->with('flash_type', 'danger')->with('flash_message', 'Registration failed; please try again.')->withInput();
         }
 
         # Log the user in
         Auth::login($user);
 
-        return Redirect::to('/')->with('flash_message', 'Welcome to House Hunters!');
+        return Redirect::to('/')->with('flash_type', 'success')->with('flash_message', 'Welcome to Domo!');
     }
 
     public function login()
@@ -31,13 +31,13 @@ class P4Security extends BaseController {
         $credentials = Input::only('username', 'password');
 
         if (Auth::attempt($credentials, $remember = true)) {
-            return Redirect::intended('/')->with('flash_message', 'Welcome Back!');
+            return Redirect::intended('/')->with('flash_type', 'success')->with('flash_message', 'Welcome Back!');
         }
         else {
-            return Redirect::to('/login')->with('flash_message', 'Log in failed; please try again.');
+            return Redirect::to('/')->with('flash_type', 'danger')->with('flash_message', 'Log in failed; please try again.');
         }
 
-        return Redirect::to('login');
+        return Redirect::to('/');
     }
 
     public function logout()

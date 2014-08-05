@@ -5,11 +5,14 @@
 | Authentication / Login / Registration Routes
 |--------------------------------------------------------------------------
 */
-
+/*
 Route::get('/', function()
 {
     return View::make('index');
-});
+});*/
+
+
+Route::get('/', 'P4Logic@index');
 
 Route::get('/logout', 'P4Security@logout');
 

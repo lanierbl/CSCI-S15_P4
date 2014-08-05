@@ -1,0 +1,91 @@
+@extends('_master')
+
+@section('title')
+CSCI S-15 - Summer 2014 - Project 4
+@stop
+
+@section('head')
+    <!-- Index Style CSS -->
+    {{ HTML::style('css/index.css') }}
+    <!-- Bootstrap -->
+    {{ HTML::script('scripts/docs.min.js') }}
+
+    <style>
+        body
+        {
+            background-image: url( {{URL::asset('images/twitter-background.jpg')}} );
+        }
+    </style>
+
+@stop
+
+@section('body')
+
+       <div class="site-wrapper">
+
+          <div class="site-wrapper-inner">
+
+            <div class="cover-container">
+
+              <div class="masthead clearfix">
+                <div class="inner">
+                  <h3 class="masthead-brand">Domo</h3>
+                  <ul class="nav masthead-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/search">Search</a></li>
+                    @if(Auth::check())
+                        <li><a href='/logout'>Log out</a></li>
+                            @if(Auth::user()->admin)
+                                <li><a href='/admin'>Admin</a></li>
+                            @endif
+                    @else
+                        <li><a href="/login">Login</a></li>
+                        <li><a href='/register'>Register</a></li>
+                    @endif
+                  </ul>
+                </div>
+              </div>
+
+              <div class="inner cover">
+                <h1 class="cover-heading">Cover your page.</h1>
+                <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+                <p class="lead">
+                  <a href="#" class="btn btn-lg btn-default">Search For Homes</a>
+                </p>
+              </div>
+
+              <div class="mastfoot">
+                <div class="inner">
+                  <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+<!--
+    <h1>Welcome to P4</h1>
+
+    <a href="/search">Search for Homes</a>
+    <br>
+    @if(Auth::check())
+        <a href="/my/listings">My Listings</a>
+        <br>
+        <a href="/my/searches">My Searches</a>
+        <br>
+        <a href='/home/list'>List a Home for Sale</a>
+        <br>
+        <br>
+        @if(Auth::user()->admin)
+            <a href='/admin'>Admin Functions</a>
+        @endif
+    @endif
+-->
+@stop
+
+@section('scripts')
+@stop

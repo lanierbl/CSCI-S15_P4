@@ -2,6 +2,23 @@
 
 class P4Logic extends BaseController {
 
+    public function index()
+    {
+        $state_options = array('Select State' => 'Select State') + DB::table('labels')->where('type', '=', 'state')->orderBy('value', 'asc')->distinct()->lists('value', 'value');
+        $city_options = array('Select City' => 'Select City') + DB::table('labels')->where('type', '=', 'city')->orderBy('value', 'asc')->distinct()->lists('value', 'value');
+        if (Auth::check()) {
+            $listings = Auth::user()->listings()->get();
+            $searches = Auth::user()->searches()->get();
+            $style_options = array('Select Style' => 'Select Style') + DB::table('labels')->where('type', '=', 'style')->orderBy('value', 'asc')->distinct()->lists('value', 'value');
+            $searchValJSON = "'none'";
+            return View::make('index', array('listings' => $listings, 'searches' => $searches,
+                                             'state_options' => $state_options,'city_options' => $city_options,
+                                             'style_options' => $style_options, 'searchJSON' => $searchValJSON));
+        }
+        return View::make('index', array('state_options' => $state_options,'city_options' => $city_options));
+    }
+
+
     public function search($searchID = null)
     {
         $state_options = array('Select State' => 'Select State') + DB::table('labels')->where('type', '=', 'state')->orderBy('value', 'asc')->distinct()->lists('value', 'value');
@@ -114,9 +131,9 @@ class P4Logic extends BaseController {
         $userID = Auth::user()->id;
         if($userID == $search->user_id) {
             Search::destroy($searchID);
-            return Redirect::to('/my/searches')->with('flash_message', 'Saved Search deleted successfully');
+            return Redirect::to('/')->with('flash_type', 'success')->with('flash_message', 'Saved Search deleted successfully');
         } else {
-            return Redirect::to('/my/searches')->with('flash_message', 'Saved Search not Deleted');
+            return Redirect::to('/')->with('flash_type', 'danger')->with('flash_message', 'Saved Search not Deleted');
         }
     }
 
@@ -131,7 +148,8 @@ class P4Logic extends BaseController {
         if (Auth::user()->admin) {
             return View::make('admin');
         }
-        return Redirect::to('/')->with('flash_message', 'Not an Admin of P4 Site!');
+        return Redirect::to('/')->with('flash_type', 'danger')->with('flash_message', 'Not an Admin of P4 Site!');
     }
+
 
 }
