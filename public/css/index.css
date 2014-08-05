@@ -275,12 +275,17 @@ footer {
     padding-top: 25px;
 }
 
+#list_form {
+    padding-top: 25px;
+}
+
 .results_div {
     padding-top: 10px;
-    padding-left: 15px;
+    margin-left: 50px;
 
 }
 
 .results_div h4 {
     text-align: center;
 }
+

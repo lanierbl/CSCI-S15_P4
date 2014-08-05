@@ -41,7 +41,6 @@ class CreateTables extends Migration {
             $table->string('addr_street');
             $table->string('addr_city');
             $table->char('addr_state', 2);
-            $table->unsignedInteger('addr_zip');
             $table->unsignedInteger('num_bed');
             $table->unsignedInteger('num_bath');
             $table->unsignedInteger('num_halfbath');
@@ -64,8 +63,6 @@ class CreateTables extends Migration {
             $table->unsignedInteger('home_id');
             $table->string('status');
             $table->unsignedInteger('price');
-            $table->date('listing_date');
-            $table->date('status_date');
             // Foreign Keys
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('home_id')->references('id')->on('homes');

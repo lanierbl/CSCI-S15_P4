@@ -10,10 +10,12 @@ class P4Logic extends BaseController {
             $listings = Auth::user()->listings()->get();
             $searches = Auth::user()->searches()->get();
             $style_options = array('Select Style' => 'Select Style') + DB::table('labels')->where('type', '=', 'style')->orderBy('value', 'asc')->distinct()->lists('value', 'value');
+            $status_options = array('Select Status' => 'Select Status') + DB::table('labels')->where('type', '=', 'status')->orderBy('value', 'asc')->distinct()->lists('value', 'value');
             $searchValJSON = "'none'";
             return View::make('index', array('listings' => $listings, 'searches' => $searches,
                                              'state_options' => $state_options,'city_options' => $city_options,
-                                             'style_options' => $style_options, 'searchJSON' => $searchValJSON));
+                                             'style_options' => $style_options, 'status_options' => $status_options,
+                                             'searchJSON' => $searchValJSON));
         }
         return View::make('index', array('state_options' => $state_options,'city_options' => $city_options));
     }
@@ -112,6 +114,40 @@ class P4Logic extends BaseController {
         $result = DB::table('homes')->whereRaw($whereStmt)->get();
 
         return (array('results'=> $result, 'flash_message'=>'Search Results'));
+    }
+
+    public function list_do() {
+
+        $home = new Home;
+        $home->addr_street     = ($_POST['addr_street']);
+        $home->addr_city       = ($_POST['addr_city']);
+        $home->addr_state      = ($_POST['addr_state']);
+        $home->style           = ($_POST['style']);
+        $home->desc            = ($_POST['desc']);
+        $home->num_bed         = ($_POST['num_bed']);
+        $home->num_bath        = ($_POST['num_bath']);
+        $home->num_halfbath    = ($_POST['num_halfbath']);
+        $home->sqrfoot         = ($_POST['sqrfoot']);
+        $home->lot_sqrfoot     = ($_POST['lot_sqrfoot']);
+        $home->park_spaces     = ($_POST['park_spaces']);
+        $home->pic1            = ($_POST['pic']);
+        if ($_POST['garage'] = 1) {$home->garage = true;} else {$home->garage = false;};
+        if ($_POST['pool'] = 1) {$home->pool = true;} else {$home->pool = false;};
+        if (!$home->save()) {
+            return (array('type'=>'error', 'text'=>'Error saving Home'));
+        }
+        $listing = new Listing;
+        $listing->user_id      = Auth::user()->id;
+        $listing->home_id      = $home->id;
+        $listing->status          = ($_POST['status']);
+        $listing->price           = ($_POST['price']);
+        if (!$listing->save()) {
+            Home::destroy($home->id);
+            return (array('type'=>'error', 'text'=>'Error saving Listing'));
+        }
+
+        //  Send back JSON array
+        return (array('type'=>'success', 'text'=>'Saved Listing', 'listID' => $listing->id));
     }
 
     public function search_save()

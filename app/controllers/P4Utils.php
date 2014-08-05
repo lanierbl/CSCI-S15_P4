@@ -142,6 +142,16 @@ class P4Utils extends BaseController {
         $label->value = 'Condo';
         $label->save();
 
+        $label = new Label;
+        $label->type = 'status';
+        $label->value = 'Active';
+        $label->save();
+
+        $label = new Label;
+        $label->type = 'status';
+        $label->value = 'Under Agreement';
+        $label->save();
+
         // New Home seed data
         echo "<br>"."Saving seed data for <b>'Home'</b> objects"."<br>";
         $home = new Home;
@@ -150,7 +160,6 @@ class P4Utils extends BaseController {
         $home->addr_street = '2500 Massachusetts Ave';
         $home->addr_city = 'Cambridge';
         $home->addr_state = 'MA';
-        $home->addr_zip = 2138;
         $home->num_bed = 2;
         $home->num_bath = 2;
         $home->num_halfbath = 1;
@@ -169,7 +178,6 @@ class P4Utils extends BaseController {
         $home->addr_street = '125 Stuart Street, Unit 250';
         $home->addr_city = 'Boston';
         $home->addr_state = 'MA';
-        $home->addr_zip = 02116;
         $home->num_bed = 2;
         $home->num_bath = 1;
         $home->num_halfbath = 1;
@@ -188,7 +196,6 @@ class P4Utils extends BaseController {
         $home->addr_street = '200 Ash Street';
         $home->addr_city = 'Cambridge';
         $home->addr_state = 'MA';
-        $home->addr_zip = 2138;
         $home->num_bed = 3;
         $home->num_bath = 2;
         $home->num_halfbath = 1;
@@ -208,8 +215,6 @@ class P4Utils extends BaseController {
         $listing->home_id = 1;
         $listing->status = 'Under Agreement';
         $listing->price = 899500;
-        $listing->listing_date = '2013-09-01';
-        $listing->status_date = '2014-07-15';
         $listing->save();
 
         $listing = new Listing;
@@ -217,8 +222,6 @@ class P4Utils extends BaseController {
         $listing->home_id = 2;
         $listing->status = 'Active';
         $listing->price = 1495000;
-        $listing->listing_date = '2014-06-01';
-        $listing->status_date = '2014-06-01';
         $listing->save();
 
         $listing = new Listing;
@@ -226,8 +229,6 @@ class P4Utils extends BaseController {
         $listing->home_id = 3;
         $listing->status = 'Active';
         $listing->price = 799500;
-        $listing->listing_date = '2014-02-15';
-        $listing->status_date = '2014-02-15';
         $listing->save();
     }
 

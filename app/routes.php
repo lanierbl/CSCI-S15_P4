@@ -68,6 +68,8 @@ Route::get('/search/delete/{searchID}', array('before' => 'auth',
                                         'uses' => 'P4Logic@search_delete')
 );
 
+Route::post('/list/do', 'P4Logic@list_do');
+
 
 Route::get('/my/listings', array('before' => 'auth',
         function() {
@@ -119,6 +121,13 @@ Route::get('/api/get_styles',
             $styles = DB::table('labels')->where('type', '=', 'style')->orderBy('value', 'asc')->distinct()->lists('value');;
             return Response::make($styles);
         }
+);
+
+Route::get('/api/get_status',
+    function() {
+        $status = DB::table('labels')->where('type', '=', 'status')->orderBy('value', 'asc')->distinct()->lists('value');;
+        return Response::make($status);
+    }
 );
 
 
