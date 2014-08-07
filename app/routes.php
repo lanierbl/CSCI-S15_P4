@@ -12,28 +12,9 @@ Route::get('/', function() {
 
 Route::get('/logout', 'P4Security@logout');
 
+Route::post('/register', 'P4Security@register');
 
-Route::get('register', array('before' => 'guest',
-        function() {
-            return View::make('register');
-        }
-    )
-);
-
-Route::post('register', array('before' => 'csrf',
-                            'uses' => 'P4Security@register')
-);
-
-Route::get('login', array('before' => 'guest',
-        function() {
-            return View::make('login');
-        }
-    )
-);
-
-Route::post('login', array('before' => 'csrf',
-                            'uses' => 'P4Security@login')
-);
+Route::post('/login', 'P4Security@login');
 
 /*
 |--------------------------------------------------------------------------
