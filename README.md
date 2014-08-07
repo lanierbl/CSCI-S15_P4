@@ -9,6 +9,31 @@
 
 ## Details for Instructor(s)
 
+## Steps to Deploy
+
+1) Create a new 'vanilla' Laravel application:
+composer create-project laravel/laravel P4 --prefer-dist
+
+2) Verify application availability with a browser - You should receive the Laravel splash page
+
+3) Move into P4 directory and initialize git
+git init
+
+4) Add GIT repository
+git remote add github git@github.com:lanierbl/CSCI-S15_P4.git
+
+5) Pull Project
+git pull github master
+
+6) Edit Database configuration file
+
+7) Migrate Schema to create DB structure
+php artisan migrate
+
+8) Seed DB with data
+http://<URL of Application>/refreshDB
+
+9) Login to system!  username = test, password = password
 
 ## Outside code
 * jQuery:  http://jquery.com
