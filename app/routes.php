@@ -32,7 +32,7 @@ Route::get('login', array('before' => 'guest',
 );
 
 Route::post('login', array('before' => 'csrf',
-                            'uses' => 'P4security@login')
+                            'uses' => 'P4Security@login')
 );
 
 /*
