@@ -6,15 +6,12 @@ Domo
 
 @section('head')
     <!-- Index Style CSS -->
-    {{ HTML::style('css/index.css') }}
     {{ HTML::style('css/font-awesome.min.css') }}
+    {{ HTML::style('css/index.css') }}
 
     <style>
         .header {
             background-image: url({{URL::asset('images/bg.jpg')}});
-        }
-        .callout {
-            background-image: url({{URL::asset('images/callout.jpg')}});
         }
     </style>
 
