@@ -79,7 +79,7 @@ class P4Utils extends BaseController {
         // New Admin User
         echo "<br><br>"."Saving Admin User: <b>'blanier'</b>"."<br>";
         $user = new User;
-        $user->username = 'blanier';
+        $user->username = 'admin';
         $user->password = Hash::make('password');
         $user->first_name = 'Site Admin';
         $user->last_name = 'User';
@@ -91,11 +91,11 @@ class P4Utils extends BaseController {
         // New Listing User
         echo "<br>"."Saving Listing User: <b>'testlister'</b>"."<br>";
         $user = new User;
-        $user->username = 'testlister';
+        $user->username = 'test';
         $user->password = Hash::make('password');
-        $user->first_name = 'Test Lister';
+        $user->first_name = 'Test';
         $user->last_name = 'User';
-        $user->email    = 'testlister@p4.cscis15.lanier.us';
+        $user->email    = 'test@p4.cscis15.lanier.us';
         $user->admin = false;
         // Save Listing User
         $user->save();

@@ -156,7 +156,9 @@ Domo
             <h4 class="modal-title" id="myModalLabel">Home Details</h4>
           </div>
           <div class="modal-body">
-            <input type="text" name="homeID" id="homeID" value=""/>
+            <div class="homedetail">
+                <input type="text" name="homeID" id="homeID" value=""/>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -332,16 +332,16 @@ $(document).on("click", ".open-homeModal", function () {
 
     $.post('/api/get/homeDetail', {'homeID':homeID}, function(response) {
 
-        for (i = 0; i < response.length; i++) {
-            var addr_street = response.addr_street
-        }
-        var addr_street = response.
+        output = '<div class="homedetail">';
+        $.each(response, function(name, value) {
+            output = output + '<p>Name: ' + name + ' - Value: ' + value + '</p>';
+        })
+        output = output + ("</div>");
+        alert(output);
+        $("#homedetail").hide().html(output).slideDown();
 
-        $.each(response, function(name, val) {
-            alert("Name: " + name + "; Value: " + val);
-        });
     }, 'json');
-    $(".modal-body #homeID").val( homeID );
+
 });
 
 $(document).on("click", ".delsearch", function () {
