@@ -7,9 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
 
-    <!-- Bootstrap CSS -->
-    {{ HTML::style('css/bootstrap.min.css') }}
-
     @yield('head')
 
 </head>

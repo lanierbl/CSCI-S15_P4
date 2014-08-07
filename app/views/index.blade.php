@@ -5,8 +5,11 @@ Domo
 @stop
 
 @section('head')
-    <!-- Index Style CSS -->
+
     {{ HTML::style('css/font-awesome.min.css') }}
+    <!-- Bootstrap CSS -->
+    {{ HTML::style('css/bootstrap.min.css') }}
+    <!-- Index Style CSS -->
     {{ HTML::style('css/index.css') }}
 
     <style>
