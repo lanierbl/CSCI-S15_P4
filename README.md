@@ -60,12 +60,12 @@ All in all, I am very happy with the outcome and looking forward to applying the
     <li>test/password (Multiple listings in seed data)</li>
 </ul>
 
-<b><u>NOTE:</u></b> There is more code in my repository than what is above but the working code is encompassed in these files.  I originally wrote the skeleton of the logic using views/forms and then late in the process decided to move most of the processing to AJAX and try and incorporate parallax into the UI.  You'll see the remnants of the old code in the OLD folder of '/app/views/old'.  All of my UI and Javascript is in 'index.blade.php" and 'index.js' respectively.
+<b><u>NOTE:</u></b> There is more code in my repository than what is above but the working code is encompassed in these files.  I originally wrote the skeleton of the logic using views/forms and then late in the process decided to move most of the processing to AJAX and try and incorporate parallax into the UI.  You'll see the remnants of the old code in the OLD folder of '/app/views/'.  All of my UI and Javascript is in 'index.blade.php" and 'index.js' respectively.
 
 
 ## Project To-Do (Things I still want to figure out)
 
-There are two areas that I will want to focus on after the course has completed:
+There are three areas that I will want to focus on after the course has completed:
 
 1. Currently, listing information is stored in a separate table than the home information (of each listing).  The DB query that pulls home descriptions (i.e., when a user does a property search) doesn't have the corresponding listing so I can't reference the listing ID.  I need to rewrite the query to do a join between 'homes' and 'listings' to reference this additional information.  The usability of the tool would be better if teh user knows the listing number alongside the home data.
 
@@ -75,6 +75,8 @@ There are two areas that I will want to focus on after the course has completed:
 
 
 ## Steps to Deploy
+
+<b><u>NOTE</u></b> - These steps where carried out on a Dreamhost account.
 
 1. Create a new 'vanilla' Laravel application:
 
