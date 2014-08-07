@@ -420,7 +420,7 @@ function getMyListings() {
         success: function(data) {
             output = '<div class="myListings">';
             if (data.length == 0) {
-                output = output + '<p>No Searches</p>';
+                output = output + '<p>No Listings</p>';
             } else {
                 $.each(data, function(index, value) {
                     output = output + '<p><a data-toggle="modal" data-id="' + value.home_id +
