@@ -15,6 +15,24 @@ Search
     <div class = "search_div">
         <fieldset id="search_form">
 
+        {{ Form::label('state','State: ') }}
+                {{ Form::select('state', array('Select State' => 'Select State'), ['id' => 'state']) }}<br><br>
+
+                {{ Form::label('city','City: ') }}
+                {{ Form::select('city', array('Select State First' => 'Select State First'), ['id' => 'city']) }}<br><br>
+
+                @if(Auth::check())
+
+                    {{ Form::label('style','Style: ') }}
+                    {{ Form::select('style', array('Select Style' => 'Select Style'), ['id' => 'style']) }}<br><br>
+
+
+
+
+
+
+
+
             {{ Form::label('state','State: ') }}
             {{ Form::select('state', $state_options, ['id' => 'state']) }}<br><br>
 

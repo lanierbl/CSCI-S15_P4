@@ -52,7 +52,6 @@ Domo
                 <li><a href='/logout'>Log out</a></li>
             @else
                 <br>
-                <!--<li><a href='/register'>Register</a></li>-->
                 <li><a data-toggle="modal" data-target="#regModal">Register</a></li>
                 <li><a data-toggle="modal" data-target="#loginModal">Login</a></li>
             @endif
@@ -147,6 +146,7 @@ Domo
     <!---------------------------------------------------------------------------------------------------------------->
     <!--                                         Home Listing Modal                                                 -->
     <!---------------------------------------------------------------------------------------------------------------->
+
     <div class="modal fade" id="homeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -155,7 +155,7 @@ Domo
             <h4 class="modal-title" id="myModalLabel">Home Details</h4>
           </div>
           <div class="modal-body">
-                    <input type="text" name="homeID" id="homeID" value=""/>
+            <input type="text" name="homeID" id="homeID" value=""/>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -185,7 +185,7 @@ Domo
         <div class="container">
             <div class="row">
                 <div class="col-md-4 text-center">
-                    <h1>Search For<br>A Place</h1>
+                    <h1>Search For A Place</h1>
                 </div>
             </div>
             <!-- /.row -->
@@ -196,103 +196,103 @@ Domo
     <section id="searchform" class="searchform">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <div class = "search_div">
-                        <fieldset id="search_form">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    {{ Form::label('src_state','State', array('class' => 'control-label')) }}
-                                    {{ Form::select('src_state', $state_options, null, array('class' => 'form-control small-select', 'id' => 'src_state')) }}
-                                </div>
-                                <div class="form-group">
-                                    {{ Form::label('src_city','City', array('class' => 'control-label')) }}
-                                    {{ Form::select('src_state', $city_options, null, array('class' => 'form-control small-select', 'id' => 'src_city')) }}
-                                </div>
+                <fieldset id="search_form">
+                    <div class="col-md-4">
+                        <div class="col-md-6 search_div">
 
-                                @if(Auth::check())
-
-                                    <div class="form-group">
-                                        {{ Form::label('src_style','Style', array('class' => 'control-label')) }}
-                                        {{ Form::select('src_style', $style_options, null, array('class' => 'form-control small-select', 'id' => 'src_style')) }}
-                                    </div>
-
-                                    <div class="form-group">
-                                        {{ Form::label('src_num_bed','Bedrooms', array('class' => 'control-label')) }}
-                                        {{ Form::select('src_num_bed', array('' => '', '1' => '1', '2' => '2', '3' => '3', '4' => '4+'), null, array('class' => 'form-control small-select', 'id' => 'src_num_bed')) }}
-                                    </div>
-
-                                    <div class="form-group">
-                                        {{ Form::label('src_num_bath','Bathrooms', array('class' => 'control-label')) }}
-                                        {{ Form::select('src_num_bath', array('' => '', '1' => '1', '2' => '2', '3' => '3+'), null, array('class' => 'form-control small-select', 'id' => 'src_num_bath')) }}
-                                    </div>
-
-                                    <div class="form-group">
-                                        {{ Form::label('src_num_halfbath','Half Bathrooms', array('class' => 'control-label')) }}
-                                        {{ Form::select('src_num_halfbath', array('' => '', '1' => '1', '2' => '2+'), null, array('class' => 'form-control small-select', 'id' => 'src_num_halfbath')) }}
-                                    </div>
-                                    {{ Form::hidden('src_guest', 'false', ['id' => 'src_guest']) }}
-                                    <br>
-
-                                @else
-
-                                    {{ Form::hidden('src_guest', 'true', ['id' => 'src_guest']) }}
-                                    <div class="text-center"<
-                                        <br><br><h4>Create an Account<br>for additional search criteria!</h4>
-                                    </div>
-
-                                @endif
-                                    <br>
-                                    <div class="text-center">
-                                        {{ Form::submit('Search For Homes!', ['id' => 'search_submit', 'class' => 'btn btn-primary btn-lg']) }}
-                                    </div>
+                            <div class="form-group">
+                                {{ Form::label('state','State', array('class' => 'control-label')) }}
+                                {{ Form::select('state', array('Select State' => 'Select State'), null, ['class' => 'form-control small-select', 'id' => 'state']) }}
                             </div>
-                        @if(Auth::check())
-                            <div class="col-md-6">
+                            <div class="form-group">
+                                {{ Form::label('city','City', array('class' => 'control-label')) }}
+                                {{ Form::select('city', array('Select City' => 'Select City'), null, ['class' => 'form-control small-select', 'id' => 'city']) }}
+                            </div>
+
+                            @if(Auth::check())
+
                                 <div class="form-group">
-                                    {{ Form::label('src_park_spaces','Parking Spaces', array('class' => 'control-label')) }}
-                                    {{ Form::select('src_park_spaces', array('' => '', '1' => '1', '2' => '2+'), null, array('class' => 'form-control small-select', 'id' => 'src_park_spaces')) }}
+                                    {{ Form::label('style','Style', array('class' => 'control-label')) }}
+                                    {{ Form::select('style', array('Select Style' => 'Select Style'), null, array('class' => 'form-control small-select', 'id' => 'style')) }}
                                 </div>
 
                                 <div class="form-group">
-                                    {{ Form::label('src_sqrfoot','Square Foot', array('class' => 'control-label')) }}
-                                    {{ Form::select('src_sqrfoot', array('' => '', '1500' => '<1500', '2500' => '1500 - 2500', '2501' => '>2500'), null, array('class' => 'form-control small-select', 'id' => 'src_sqrfoot')) }}
+                                    {{ Form::label('num_bed','Bedrooms', array('class' => 'control-label')) }}
+                                    {{ Form::select('num_bed', array('' => '', '1' => '1', '2' => '2', '3' => '3', '4' => '4+'), null, array('class' => 'form-control small-select', 'id' => 'num_bed')) }}
                                 </div>
 
                                 <div class="form-group">
-                                    {{ Form::label('src_lot_sqrfoot','Lot Square Foot', array('class' => 'control-label')) }}
-                                    {{ Form::select('src_lot_sqrfoot', array('' => '', '10K' => '<10K', '40K' => '10K - 40K', '41K' => '>40K'), null, array('class' => 'form-control small-select', 'id' => 'src_lot_sqrfoot')) }}
+                                    {{ Form::label('num_bath','Bathrooms', array('class' => 'control-label')) }}
+                                    {{ Form::select('num_bath', array('' => '', '1' => '1', '2' => '2', '3' => '3+'), null, array('class' => 'form-control small-select', 'id' => 'num_bath')) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ Form::label('num_halfbath','Half Bathrooms', array('class' => 'control-label')) }}
+                                    {{ Form::select('num_halfbath', array('' => '', '1' => '1', '2' => '2+'), null, array('class' => 'form-control small-select', 'id' => 'num_halfbath')) }}
+                                </div>
+                                {{ Form::hidden('guest', 'false', ['id' => 'guest']) }}
+                            @else
+
+                                {{ Form::hidden('guest', 'true', ['id' => 'guest']) }}
+                                <div class="text-center">
+                                    <br><br><h4>Create an Account<br>for additional search criteria!</h4>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="col-md-6 search_div">
+                            @if(Auth::check())
+                                <div class="form-group">
+                                    {{ Form::label('park_spaces','Parking Spaces', array('class' => 'control-label')) }}
+                                    {{ Form::select('park_spaces', array('' => '', '1' => '1', '2' => '2+'), null, array('class' => 'form-control small-select', 'id' => 'park_spaces')) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ Form::label('sqrfoot','Square Foot', array('class' => 'control-label')) }}
+                                    {{ Form::select('sqrfoot', array('' => '', '1500' => '<1500', '2500' => '1500 - 2500', '2501' => '>2500'), null, array('class' => 'form-control small-select', 'id' => 'sqrfoot')) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ Form::label('lot_sqrfoot','Lot Square Foot', array('class' => 'control-label')) }}
+                                    {{ Form::select('lot_sqrfoot', array('' => '', '10K' => '<10K', '40K' => '10K - 40K', '41K' => '>40K'), null, array('class' => 'form-control small-select', 'id' => 'lot_sqrfoot')) }}
                                 </div>
 
                                 <div class="checkbox">
-                                  {{ Form::checkbox('src_garage','1') }}
-                                  {{ Form::label('src_garage','Garage') }}
+                                    {{ Form::checkbox('garage','1') }}
+                                    {{ Form::label('garage','Garage') }}
                                 </div>
 
                                 <div class="checkbox">
-                                    {{ Form::checkbox('src_pool','1') }}
-                                    {{ Form::label('src_pool','Pool') }}
+                                    {{ Form::checkbox('pool','1') }}
+                                    {{ Form::label('pool','Pool') }}
                                 </div>
 
                                 <br>
                                 <div class="form-group">
-                                    {{ Form::label('src_searchName','Save Search', array('class' => 'control-label')) }}
-                                    {{ Form::text('src_searchName', null, ['class' => 'form-control', 'placeholder' => 'Search Name']) }}
+                                    {{ Form::label('searchName','Save Search', array('class' => 'control-label')) }}
+                                    {{ Form::text('searchName', null, ['class' => 'form-control', 'placeholder' => 'Search Name']) }}
                                 </div>
-                            </div>  <!-- /.col-md-2 -->
-                        @endif
-                        </fieldset>  <!-- /search_form -->
-                    </div> <!-- /.search-div -->
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class = "results_div">
+                            <h4>Search Results</h4>
+                            <br>
+                            <div id="result"></div>
+                        </div> <!-- /.results-div -->
+                    </div>
+                </fieldset>
+            </div>  <!--  ./row  -->
+            <div class="row">
+                <div class="col-md-4">
+                    <br>
+                    <div class="text-center">
+                        {{ Form::submit('Search For Homes!', ['id' => 'search_submit', 'class' => 'btn btn-primary btn-lg']) }}
+                    </div>
                 </div>
-                <div class="col-md-8">
-                    <div class = "results_div">
-                        <h4>Search Results</h4>
-                        <br>
-                        <div id="result"></div>
-                    </div> <!-- /.results-div -->
-                </div> <!-- /.col-md-8 -->
-            </div>  <!-- /.row -->
-        </div>  <!-- /.container -->
-    </section>
+            </div>
+        </div>  <!--  /.container  -->
+    </section>  <!--  /.searchform  -->
 
     @if(Auth::check())
         <section id="mysearch" class="mysearch bg-primary">
@@ -302,13 +302,7 @@ Domo
                         <h2>My Search</h2>
                     </div>
                     <div class="col-md-8">
-                        @if(count($searches) == 0)
-                        <p>No Searches</p>
-                        @else
-                            @foreach($searches as $s)
-                                <p><a href="/search/{{ $s->name }}">{{ $s->name }}     <a class="delsearch" dataID="{{ $s->id }}"><span class="glyphicon glyphicon-remove"></span></a></p>
-                            @endforeach
-                        @endif
+                        <div id="mySearches"></div>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -321,7 +315,7 @@ Domo
     <!--                                               List A Place                                                 -->
     <!---------------------------------------------------------------------------------------------------------------->
 
-        @if(Auth::check())
+    @if(Auth::check())
 
     <section id="list" class="list bg-info">
         <div class="container">
@@ -346,33 +340,33 @@ Domo
                         </div>
                         <div class="form-group">
                             {{ Form::label('list_city','City', array('class' => 'control-label')) }}
-                            {{ Form::select('list_city', $city_options, null, array('class' => 'form-control', 'id' => 'list_city')) }}
+                            {{ Form::select('list_city', array('Select City' => 'Select City'), null, array('class' => 'form-control', 'id' => 'list_city')) }}
                         </div>
                         <div class="form-group">
                             {{ Form::label('list_state','State', array('class' => 'control-label')) }}
-                            {{ Form::select('list_state', $state_options, null, array('class' => 'form-control', 'id' => 'list_state')) }}
+                            {{ Form::select('list_state', array('Select State' => 'Select State'), null, array('class' => 'form-control', 'id' => 'list_state')) }}
                         </div>
                         <div class="form-group">
                             {{ Form::label('list_style','Style', array('class' => 'control-label')) }}
-                            {{ Form::select('list_style', $style_options, null, array('class' => 'form-control', 'id' => 'list_style')) }}
+                            {{ Form::select('list_style', array('Select Style' => 'Select Style'), null, array('class' => 'form-control', 'id' => 'list_style')) }}
                         </div>
                         <div class="form-group">
                             {{ Form::label('list_num_bed','Bedrooms', array('class' => 'control-label')) }}
-                            {{ Form::select('list_num_bed', array('' => '', '1' => '1', '2' => '2', '3' => '3', '4' => '4+'), null, array('class' => 'form-control', 'id' => 'list_num_bed')) }}
+                            {{ Form::select('list_num_bed', array('' => '', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6'), null, array('class' => 'form-control', 'id' => 'list_num_bed')) }}
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             {{ Form::label('list_num_bath','Bathrooms', array('class' => 'control-label')) }}
-                            {{ Form::select('list_num_bath', array('' => '', '1' => '1', '2' => '2', '3' => '3+'), null, array('class' => 'form-control', 'id' => 'list_num_bath')) }}
+                            {{ Form::select('list_num_bath', array('' => '', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5'), null, array('class' => 'form-control', 'id' => 'list_num_bath')) }}
                         </div>
                         <div class="form-group">
                             {{ Form::label('list_num_halfbath','Half Bathrooms', array('class' => 'control-label')) }}
-                            {{ Form::select('list_num_halfbath', array('' => '', '1' => '1', '2' => '2+'), null, array('class' => 'form-control', 'id' => 'list_num_halfbath')) }}
+                            {{ Form::select('list_num_halfbath', array('' => '', '1' => '1', '2' => '2', '3' => '3', '4' => '4'), null, array('class' => 'form-control', 'id' => 'list_num_halfbath')) }}
                         </div>
                         <div class="form-group">
                             {{ Form::label('list_park_spaces','Parking Spaces', array('class' => 'control-label')) }}
-                            {{ Form::select('list_park_spaces', array('' => '', '1' => '1', '2' => '2+'), null, array('class' => 'form-control', 'id' => 'list_park_spaces')) }}
+                            {{ Form::select('list_park_spaces', array('' => '', '1' => '1', '2' => '2', '3' => '3', '4' => '4'), null, array('class' => 'form-control', 'id' => 'list_park_spaces')) }}
                         </div>
                         <div class="form-group">
                             {{ Form::label('list_sqrfoot','Square Foot', array('class' => 'control-label')) }}
@@ -385,26 +379,24 @@ Domo
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            {{ Form::label('list_desc','Description', array('class' => 'control-label')) }}
-                            {{ Form::text('list_desc', null, ['id' => 'list_desc', 'class' => 'form-control', 'placeholder' => 'Description']) }}
-                        </div>
-                        <br>
-                        <div class="checkbox">
-                          {{ Form::checkbox('list_garage','1', null, ['id' => 'list_garage']) }}
-                          {{ Form::label('list_garage','Garage') }}
-                        </div>
-                        <div class="checkbox">
-                            {{ Form::checkbox('list_pool','1', null, ['id' => 'list_pool']) }}
-                            {{ Form::label('list_pool','Pool') }}
-                        </div>
-                        <br>
-                        <div class="form-group">
                             {{ Form::label('list_status','Listing Status', array('class' => 'control-label')) }}
-                            {{ Form::select('list_status', $status_options, null, array('class' => 'form-control', 'id' => 'list_status', 'placeholder' => 'Listing Status')) }}
+                            {{ Form::select('list_status', array('Select Status' => 'Select Status'), null, array('class' => 'form-control', 'id' => 'list_status', 'placeholder' => 'Listing Status')) }}
                         </div>
                         <div class="form-group">
                             {{ Form::label('list_price','Listing Price', array('class' => 'control-label')) }}
                             {{ Form::text('list_price', null, ['id' => 'list_price', 'class' => 'form-control', 'placeholder' => '$']) }}
+                        </div>
+                        <div class="form-group">
+                            {{ Form::label('list_desc','Description', array('class' => 'control-label')) }}
+                            {{ Form::textarea('list_desc', null, ['id' => 'list_desc', 'class' => 'form-control', 'rows' => '6', 'placeholder' => 'Description']) }}
+                        </div>
+                        <div class="checkbox">
+                            {{ Form::checkbox('list_garage','1', null, ['id' => 'list_garage']) }}
+                            {{ Form::label('list_garage','Garage') }}
+                        </div>
+                        <div class="checkbox">
+                            {{ Form::checkbox('list_pool','1', null, ['id' => 'list_pool']) }}
+                            {{ Form::label('list_pool','Pool') }}
                         </div>
                     </div> <!-- /.col-md-4 -->
                 </div>  <!-- /.row -->
@@ -432,13 +424,7 @@ Domo
                     <h2>My Listings</h2>
                 </div>
                 <div class="col-md-8">
-                    @if(count($listings) == 0)
-                        <p>No Listings</p>
-                    @else
-                        @foreach($listings as $l)
-                            <p>ID: {{ $l->id }} - Status: {{ $l->status }}</p>
-                        @endforeach
-                    @endif
+                    <div id="myListings"></div>
                 </div>
             </div>
             <!-- /.row -->
@@ -447,56 +433,87 @@ Domo
     </section>
 
 
+        @if(Auth::user()->admin)
     <!---------------------------------------------------------------------------------------------------------------->
     <!--                                                Admin                                                       -->
     <!---------------------------------------------------------------------------------------------------------------->
 
-        @if(Auth::user()->admin)
-            <section id="admin" class="admin">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-10 col-lg-offset-1 text-center">
-                            <h2>Our Work</h2>
-                            <hr class="small">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="portfolio-item">
-                                        <a href="#">
-                                            <img class="img-portfolio img-responsive" src="img/portfolio-1.jpg">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="portfolio-item">
-                                        <a href="#">
-                                            <img class="img-portfolio img-responsive" src="img/portfolio-2.jpg">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="portfolio-item">
-                                        <a href="#">
-                                            <img class="img-portfolio img-responsive" src="img/portfolio-3.jpg">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="portfolio-item">
-                                        <a href="#">
-                                            <img class="img-portfolio img-responsive" src="img/portfolio-4.jpg">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.row (nested) -->
-                            <a href="#" class="btn btn-dark">View More Items</a>
-                        </div>
-                        <!-- /.col-lg-10 -->
+        <section id="admin" class="admin bg-primary">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <h1>Admin</h1>
                     </div>
-                    <!-- /.row -->
                 </div>
-                <!-- /.container -->
-            </section>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+        </section>
+
+        <section id="adminBody" class="adminBody">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 text-center">
+                        <h2><span class="label label-default">City</span></h2>
+                        <br><br>
+                        <fieldset class="form-inline" role="form">
+                          <div class="form-group">
+                            {{ Form::label('add_city','New City', array('class' => 'control-label sr-only')) }}
+                            {{ Form::text('add_city', null, ['id' => 'add_city', 'class' => 'form-control', 'placeholder' => 'New City']) }}
+                          </div>
+                          {{ Form::submit('Add', ['id' => 'addCity_submit', 'class' => 'btn btn-primary']) }}
+                        </fieldset>
+                        <br><br>
+                        <div id="current_city"></div>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <h2><span class="label label-default">States</span></h2>
+                        <br><br>
+                        <fieldset class="form-inline" role="form">
+                          <div class="form-group">
+                            {{ Form::label('add_state','New State', array('class' => 'control-label sr-only')) }}
+                            {{ Form::text('add_state', null, ['id' => 'add_state', 'class' => 'form-control', 'placeholder' => 'New State']) }}
+                          </div>
+                          {{ Form::submit('Add', ['id' => 'addState_submit', 'class' => 'btn btn-primary']) }}
+                        </fieldset>
+                        <br><br>
+                        <div id="current_state"></div>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <h2><span class="label label-default">Styles</span></h2>
+                        <br><br>
+                        <fieldset class="form-inline" role="form">
+                          <div class="form-group">
+                            {{ Form::label('add_style','New Style', array('class' => 'control-label sr-only')) }}
+                            {{ Form::text('add_style', null, ['id' => 'add_style', 'class' => 'form-control', 'placeholder' => 'New Style']) }}
+                          </div>
+                          {{ Form::submit('Add', ['id' => 'addStyle_submit', 'class' => 'btn btn-primary']) }}
+                        </fieldset>
+                        <br><br>
+                        <div id="current_style"></div>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <h2><span class="label label-default">Status</span></h2>
+                        <br><br>
+                        <fieldset class="form-inline" role="form">
+                          <div class="form-group">
+                            {{ Form::label('add_status','New Status', array('class' => 'control-label sr-only')) }}
+                            {{ Form::text('add_status', null, ['id' => 'add_status', 'class' => 'form-control', 'placeholder' => 'New Status']) }}
+                          </div>
+                          {{ Form::submit('Add', ['id' => 'addStatus_submit', 'class' => 'btn btn-primary']) }}
+                        </fieldset>
+                        <br><br>
+                        <div id="current_status"></div>
+                    </div>
+                </div>
+            </div>  <!-- /.container -->
+        </section>
+
+        <section id="adminFtr" class="adminFtr bg-primary">
+            <div class="container">
+            </div>
+            <!-- /.container -->
+        </section>
 
        @endif
     @endif
@@ -533,58 +550,14 @@ Domo
 @section('scripts')
 
     <!---------------------------------------------------------------------------------------------------------------->
-    <!--                                                Scripts                                                       -->
+    <!--                                                Scripts                                                     -->
     <!---------------------------------------------------------------------------------------------------------------->
 
-{{ HTML::script('scripts/index.js') }}
+    {{ HTML::script('scripts/index.js') }}
 
-<script>
-    // Closes the sidebar menu
-    $("#menu-close").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-
-    // Opens the sidebar menu
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-
-    // Scrolls to the selected menu item on the page
-    $(function() {
-        $('a[href*=#]:not([href=#])').click(function() {
-            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
-
-                var target = $(this.hash);
-                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                if (target.length) {
-                    $('html,body').animate({
-                        scrollTop: target.offset().top
-                    }, 1000);
-                    return false;
-                }
-            }
-        });
-    });
-
-    window.setTimeout(function() {
-      $(".flash").fadeTo(500, 0).slideUp(500, function(){
-          $(this).remove();
-      });
-    }, 5000);
-
-    $(document).on("click", ".open-homeModal", function () {
-         var homeID = $(this).data('id');
-         $(".modal-body #homeID").val( homeID );
-    });
-
-    $(document).on("click", "#delsearch", function () {
-         var homeID = $(this).data('dataID');
-         alert(homeID);
-    });
+    <script>
 
 
-</script>
+    </script>
 
 @stop

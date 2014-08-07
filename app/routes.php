@@ -5,14 +5,10 @@
 | Authentication / Login / Registration Routes
 |--------------------------------------------------------------------------
 */
-/*
-Route::get('/', function()
-{
+
+Route::get('/', function() {
     return View::make('index');
-});*/
-
-
-Route::get('/', 'P4Logic@index');
+});
 
 Route::get('/logout', 'P4Security@logout');
 
@@ -45,19 +41,6 @@ Route::post('login', array('before' => 'csrf',
 |--------------------------------------------------------------------------
 */
 
-Route::get('/home/list', array('before' => 'auth',
-        function() {
-            return View::make('newlisting');
-        }
-    )
-);
-
-Route::get('/home/detail/{homeID}', 'P4Logic@home_detail');
-
-
-Route::get('/search/{searchID?}', 'P4Logic@search');
-
-
 Route::post('/search/do', 'P4Logic@search_do');
 
 
@@ -71,62 +54,93 @@ Route::get('/search/delete/{searchID}', array('before' => 'auth',
 Route::post('/list/do', 'P4Logic@list_do');
 
 
-Route::get('/my/listings', array('before' => 'auth',
-        function() {
-            $listings = Auth::user()->listings()->get();
-            return View::make('mylistings', array('listings' => $listings));
-        }
-    )
-);
-
-
-Route::get('/my/searches', array('before' => 'auth',
-        function() {
-            $searches = Auth::user()->searches()->get();
-            return View::make('mysearches', array('searches' => $searches));
-        }
-    )
-);
-
-
-Route::get('/admin', array('before' => 'auth',
-        'uses' => 'P4Logic@admin')
-);
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
 */
 
-
-Route::get('/api/get_states',
-        function() {
-            $states = DB::table('labels')->where('type', '=', 'state')->orderBy('value', 'asc')->distinct()->lists('value');
-            return Response::make($states);
-        }
+Route::get('/api/get/ddList/{label}',
+    function($label) {
+        $data = DB::table('labels')->where('type', '=', $label)->orderBy('value', 'asc')->distinct()->lists('value');
+        return Response::make($data);
+    }
 );
 
-
-Route::get('/api/get_cities',
-        function() {
-            $state = Input::get('option');
-            $cities = DB::table('labels')->where('type', '=', 'city')->orderBy('value', 'asc')->distinct()->lists('value', 'value');
-            return Response::make($cities);
-        }
+Route::get('/api/get/label/{label}',
+    function($label) {
+        $data = DB::table('labels')->where('type', '=', $label)->orderBy('value', 'asc')->distinct()->lists('value');
+        return Response::make($data);
+    }
 );
 
-Route::get('/api/get_styles',
-        function() {
-            $styles = DB::table('labels')->where('type', '=', 'style')->orderBy('value', 'asc')->distinct()->lists('value');;
-            return Response::make($styles);
-        }
-);
-
-Route::get('/api/get_status',
+Route::post('/api/get/searchJSON', array('before' => 'auth',
     function() {
-        $status = DB::table('labels')->where('type', '=', 'status')->orderBy('value', 'asc')->distinct()->lists('value');;
-        return Response::make($status);
+        $searchID   = $_POST["searchID"];
+        $search = Search::find($searchID);
+        $JSONstring = $search->searchValJSON;
+        return Response::make(array('searchJSON' => json_decode($JSONstring)));
+    })
+);
+
+Route::post('/api/get/homeDetail',
+    function() {
+        $homeID   = $_POST["homeID"];
+        $home = Home::find($homeID);
+        return Response::make($home);
+    }
+);
+
+Route::get('/api/get/mySearches', array('before' => 'auth',
+    function() {
+        $searches = Auth::user()->searches()->orderBy('updated_at', 'desc')->get();
+        return Response::make($searches);
+    })
+);
+
+Route::get('/api/get/myListings', array('before' => 'auth',
+    function() {
+        $listings = Auth::user()->listings()->orderBy('updated_at', 'desc')->get();
+        return Response::make($listings);
+    })
+);
+
+Route::post('/api/delete/search',
+    function() {
+        $search = Search::find($_POST["searchID"]);
+        $userID = Auth::user()->id;
+        if($userID == $search->user_id) {
+            Search::destroy($search->id);
+            return Response::make(array('action' => 'success', 'message'=>'Saved Search deleted successfully'));
+        } else {
+            return Response::make(array('action' => 'error', 'message'=>'Saved Search not Deleted'));
+        }
+    }
+);
+
+Route::post('/api/add/label',
+    function() {
+        $label = new Label;
+        $label->type = ($_POST["label"]);
+        $label->value = ($_POST["value"]);
+        $label->save();
+        return Response::make(array('action' => 'success', 'message'=>'Label saved successfully'));
+    }
+);
+
+
+Route::post('/api/delete/listing',
+    function() {
+        $listing = Listing::find($_POST["listingID"]);
+        $userID = Auth::user()->id;
+        if($userID == $listing->user_id) {
+            $home = Home::find($listing->home_id);
+            Listing::destroy($listing->id);
+            Home::destroy($home->id);
+            return Response::make(array('action' => 'success', 'message'=>'Listing deleted successfully'));
+        } else {
+            return Response::make(array('action' => 'error', 'message'=>'Listing not Deleted'));
+        }
     }
 );
 

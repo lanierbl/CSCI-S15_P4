@@ -213,44 +213,25 @@ hr.small {
 
 
 
-/* Portfolio */
+/* Admin */
 
-.portfolio {
-    padding: 50px 0;
+.admin {
+    height: 10%;
+    vertical-align: middle;
 }
 
-.portfolio-item {
-    margin-bottom: 30px;
+.adminBody {
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 75%;
 }
 
-.img-portfolio {
-    margin: 0 auto;
-}
-
-.img-portfolio:hover {
-    opacity: 0.8;
-}
-
-/* Call to Action */
-
-.call-to-action {
-    padding: 50px 0;
-}
-
-.call-to-action .btn {
-    margin: 10px;
-}
-
-/* Map */
-
-.map {
-    height: 500px;
-}
-
-@media(max-width:768px) {
-    .map {
-        height: 75%;
-    }
+.adminFtr {
+    bottom:0; left:0;
+    padding: 10px 0;
+    width: 100%;
+    height: 15%
 }
 
 /* Footer */
@@ -287,5 +268,21 @@ footer {
 
 .results_div h4 {
     text-align: center;
+}
+
+#mysearch a {
+    color: #ffffff;
+}
+
+#mysearch p {
+    font-size: 16px;
+}
+
+#mylist a {
+    font-size: 16px;
+ }
+
+.icon {
+    color: #c9191d;
 }
 
