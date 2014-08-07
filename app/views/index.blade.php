@@ -6,7 +6,7 @@ Domo
 
 @section('head')
 
-    {{ HTML::style('css/font-awesome.min.css') }}
+    {{ HTML::style('fonts/font-awesome-4.1.0/css/font-awesome.min.css') }}
     <!-- Bootstrap CSS -->
     {{ HTML::style('css/bootstrap.min.css') }}
     <!-- Index Style CSS -->
