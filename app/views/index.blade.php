@@ -7,6 +7,7 @@ Domo
 @section('head')
     <!-- Index Style CSS -->
     {{ HTML::style('css/index.css') }}
+    {{ HTML::style('css/font-awesome.min.css') }}
 
     <style>
         .header {
