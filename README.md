@@ -67,7 +67,7 @@ All in all, I am very happy with the outcome and looking forward to applying the
 
 There are three areas that I will want to focus on after the course has completed:
 
-1. Currently, listing information is stored in a separate table than the home information (of each listing).  The DB query that pulls home descriptions (i.e., when a user does a property search) doesn't have the corresponding listing so I can't reference the listing ID.  I need to rewrite the query to do a join between 'homes' and 'listings' to reference this additional information.  The usability of the tool would be better if teh user knows the listing number alongside the home data.
+1. Currently, listing information is stored in a separate table than the home information (of each listing).  The DB query that pulls home descriptions (i.e., when a user does a property search) doesn't have the corresponding listing so I can't reference the listing ID.  I need to rewrite the query to do a join between 'homes' and 'listings' to reference this additional information.  The usability of the tool would be better if the user knows the listing number alongside the home data.
 
 2. Give admins the ability to make other users admins of the system.
 
