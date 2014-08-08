@@ -41,13 +41,7 @@ Route::post('/list/do', 'P4Logic@list_do');
 |--------------------------------------------------------------------------
 */
 
-Route::get('/api/get/ddList/{label}',
-    function($label) {
-        $data = DB::table('labels')->where('type', '=', $label)->orderBy('value', 'asc')->distinct()->lists('value');
-        return Response::make($data);
-    }
-);
-
+// Returns listing of labels based on value passed
 Route::get('/api/get/label/{label}',
     function($label) {
         $data = DB::table('labels')->where('type', '=', $label)->orderBy('value', 'asc')->distinct()->lists('value');
@@ -55,6 +49,7 @@ Route::get('/api/get/label/{label}',
     }
 );
 
+// Returns JSON string of saved search
 Route::post('/api/get/searchJSON', array('before' => 'auth',
     function() {
         $searchID   = $_POST["searchID"];
@@ -64,6 +59,7 @@ Route::post('/api/get/searchJSON', array('before' => 'auth',
     })
 );
 
+// Returns home object of detail data
 Route::post('/api/get/homeDetail',
     function() {
         $homeID   = $_POST["homeID"];
@@ -72,6 +68,7 @@ Route::post('/api/get/homeDetail',
     }
 );
 
+// Returns saved searches of user
 Route::get('/api/get/mySearches', array('before' => 'auth',
     function() {
         $searches = Auth::user()->searches()->orderBy('updated_at', 'desc')->get();
@@ -79,6 +76,7 @@ Route::get('/api/get/mySearches', array('before' => 'auth',
     })
 );
 
+// Returns saved listings of user
 Route::get('/api/get/myListings', array('before' => 'auth',
     function() {
         $listings = Auth::user()->listings()->orderBy('updated_at', 'desc')->get();
@@ -86,6 +84,7 @@ Route::get('/api/get/myListings', array('before' => 'auth',
     })
 );
 
+// Deletes Search object after validating user
 Route::post('/api/delete/search',
     function() {
         $search = Search::find($_POST["searchID"]);
@@ -99,6 +98,7 @@ Route::post('/api/delete/search',
     }
 );
 
+// Adds new label value based on type
 Route::post('/api/add/label',
     function() {
         $label = new Label;
@@ -109,7 +109,7 @@ Route::post('/api/add/label',
     }
 );
 
-
+// Deletes Listing object after validating user
 Route::post('/api/delete/listing',
     function() {
         $listing = Listing::find($_POST["listingID"]);

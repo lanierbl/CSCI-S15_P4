@@ -7,8 +7,6 @@ CSCI S-15 - Summer 2014 - Project 4
 @section('head')
     <!-- Index Style CSS -->
     {{ HTML::style('css/index.css') }}
-    <!-- Bootstrap -->
-    {{ HTML::script('scripts/docs.min.js') }}
 
     <style>
         body

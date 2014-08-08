@@ -552,12 +552,7 @@ Domo
 
     <!--                                                Scripts                                                     -->
 
-
     {{ HTML::script('scripts/index.js') }}
 
-    <script>
-
-
-    </script>
 
 @stop

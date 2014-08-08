@@ -2,6 +2,14 @@
 
 class P4Security extends BaseController {
 
+
+    /*
+     * register()
+     *
+     * Creates new user based on the form attributes.
+     *
+    */
+
     public function register()
     {
         $user = new User;
@@ -26,6 +34,15 @@ class P4Security extends BaseController {
         return Redirect::to('/')->with('flash_type', 'success')->with('flash_message', 'Welcome to Domo!');
     }
 
+
+    /*
+     * login()
+     *
+     * Authenticates user credentials and allows access to site if valid.
+     *
+    */
+
+
     public function login()
     {
         $credentials = Input::only('username', 'password');
@@ -39,6 +56,14 @@ class P4Security extends BaseController {
 
         return Redirect::to('/');
     }
+
+    /*
+     * logout()
+     *
+     * Logs the current session out of the system.
+     *
+    */
+
 
     public function logout()
     {

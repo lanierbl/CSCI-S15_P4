@@ -2,6 +2,14 @@
 
 class P4Utils extends BaseController {
 
+
+    /*
+     * debug()
+     *
+     * Debug screen - Displays relevant information about environment.
+     *
+    */
+
     public function debug()
     {
         echo '<pre>';
@@ -47,6 +55,13 @@ class P4Utils extends BaseController {
     }
 
 
+    /*
+     * triggerError()
+     *
+     * Simulates a system error for diagnostic purposes
+     *
+    */
+
     public function triggerError()
     {
         # Class Foobar should not exist, so this should create an error
@@ -54,11 +69,25 @@ class P4Utils extends BaseController {
     }
 
 
+    /*
+     * getEnvironment()
+     *
+     * Returns Environment variable setting
+     *
+    */
+
     public function getEnvironment()
     {
         echo "Environment: ".App::environment();
     }
 
+
+    /*
+     * refreshDB()
+     *
+     * Populates DB with seed data.
+     *
+    */
 
     public function refreshDB()
     {

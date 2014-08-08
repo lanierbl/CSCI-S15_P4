@@ -2,32 +2,17 @@
 
 class P4Logic extends BaseController {
 
-    public function index()
-    {
-        $state_options = array('Select State' => 'Select State') + DB::table('labels')->where('type', '=', 'state')->orderBy('value', 'asc')->distinct()->lists('value', 'value');
-        $city_options = array('Select City' => 'Select City') + DB::table('labels')->where('type', '=', 'city')->orderBy('value', 'asc')->distinct()->lists('value', 'value');
-        if (Auth::check()) {
-            $style_options = array('Select Style' => 'Select Style') + DB::table('labels')->where('type', '=', 'style')->orderBy('value', 'asc')->distinct()->lists('value', 'value');
-            $status_options = array('Select Status' => 'Select Status') + DB::table('labels')->where('type', '=', 'status')->orderBy('value', 'asc')->distinct()->lists('value', 'value');
-            return View::make('index', array('state_options' => $state_options,'city_options' => $city_options,
-                                             'style_options' => $style_options, 'status_options' => $status_options));
-        }
-        return View::make('index', array('state_options' => $state_options,'city_options' => $city_options));
-    }
 
-
-    public function search($searchID = null)
-    {
-        $state_options = array('Select State' => 'Select State') + DB::table('labels')->where('type', '=', 'state')->orderBy('value', 'asc')->distinct()->lists('value', 'value');
-        $city_options = array('Select City' => 'Select City') + DB::table('labels')->where('type', '=', 'city')->orderBy('value', 'asc')->distinct()->lists('value', 'value');
-        $style_options = array('Select Style' => 'Select Style') + DB::table('labels')->where('type', '=', 'style')->orderBy('value', 'asc')->distinct()->lists('value', 'value');
-        if ($searchID != null) {
-            $search = Search::find($searchID);
-            }
-        return View::make('search', array('state_options' => $state_options,
-                                          'city_options' => $city_options,
-                                          'style_options' => $style_options));
-    }
+    /*
+     * search_do()
+     *
+     * Parses, creates, and returns search results.  Routine looks for all attributes that were in the POST from the form
+     * (you must go though all individually since all attributes a potential options).  As new attributes as determined to
+     * be part of the request, they are added to a WHERE statement that is being built.
+     *
+     * This statement is then executed by query builder using the whereRaw command.  Results are returned as a collection.
+     *
+    */
 
 
     public function search_do()
@@ -108,6 +93,16 @@ class P4Logic extends BaseController {
         return (array('results'=> $result, 'flash_message'=>'Search Results'));
     }
 
+
+    /*
+     * list_do()
+     *
+     * Adds a new listing to the database.  First the Home object must be saved.  If that save is successful, then the
+     * Listing object is created (there is a foreign key on the 'listings' table for the home_id.
+     *
+    */
+
+
     public function list_do() {
 
         $home = new Home;
@@ -142,6 +137,16 @@ class P4Logic extends BaseController {
         return (array('type'=>'success', 'text'=>'Saved Listing', 'listID' => $listing->id));
     }
 
+
+    /*
+     * search_save()
+     *
+     * Adds Search object if the user elects to save their search parameters.  The search query is saved as the JSON string
+     * that is used by the search_do() routine.
+     *
+    */
+
+
     public function search_save()
     {
         // New Search
@@ -152,6 +157,16 @@ class P4Logic extends BaseController {
         // Save new Search
         $search->save();
     }
+
+
+    /*
+     * search_delete()
+     *
+     * Search object is deleted if requested.  Prior to deleting object, the routine will check to make sure the
+     * authenticated user requesting the search be deleted owns the Search object.
+     *
+    */
+
 
     public function search_delete($searchID)
     {
@@ -164,20 +179,5 @@ class P4Logic extends BaseController {
             return Redirect::to('/')->with('flash_type', 'danger')->with('flash_message', 'Saved Search not Deleted');
         }
     }
-
-    public function home_detail($homeID)
-    {
-        $home = Home::find($homeID);
-        return View::make('homedetail', array('home' => $home));
-    }
-
-    public function admin()
-    {
-        if (Auth::user()->admin) {
-            return View::make('admin');
-        }
-        return Redirect::to('/')->with('flash_type', 'danger')->with('flash_message', 'Not an Admin of P4 Site!');
-    }
-
 
 }

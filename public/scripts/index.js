@@ -1,5 +1,14 @@
 $(document).ready(function($){
 
+
+    /*
+     * Home Search AJAX
+     *
+     * Captures form data from click event, performs client-side validation, and create JSON string to pass search
+     * parameters to PHP.  Returns results to screen after AJAX call.
+     *
+     */
+
     $("#search_submit").click(function() {
         //Set form variables to be sent via JSON
 
@@ -90,6 +99,15 @@ $(document).ready(function($){
         }
 
     });
+
+
+    /*
+     * List Home AJAX
+     *
+     * Captures form data from click event, performs client-side validation, and create JSON string to pass listing
+     * parameters to PHP.  Returns results to screen after AJAX call.
+     *
+     */
 
     $("#list_submit").click(function() {
 
@@ -187,12 +205,20 @@ $(document).ready(function($){
         $('select[name=list_status]').css('border-color','');
     });
 
+    /*
+     * Add new city label
+     */
+
     $("#addCity_submit").click(function() {
         var label = 'city';
         var value = document.getElementById("add_city").value;
         document.getElementById("add_city").value = document.getElementById("add_city").defaultValue;
         addLabel(label, value);
     });
+
+    /*
+     * Add new state label
+     */
 
     $("#addState_submit").click(function() {
         var label = 'state';
@@ -201,12 +227,20 @@ $(document).ready(function($){
         addLabel(label, value);
     });
 
+    /*
+     * Add new style label
+     */
+
     $("#addStyle_submit").click(function() {
         var label = 'style';
         var value = document.getElementById("add_style").value;
         document.getElementById("add_style").value = document.getElementById("add_style").defaultValue;
         addLabel(label, value);
     });
+
+    /*
+     * Add new status label
+     */
 
     $("#addStatus_submit").click(function() {
         var label = 'status';
@@ -215,8 +249,12 @@ $(document).ready(function($){
         addLabel(label, value);
     });
 
+    /*
+     * Return labels (type passed as parameter) for dropdown lists
+     */
+
     function getDropdownList(label) {
-        url = "/api/get/ddList/" + label;
+        url = "/api/get/label/" + label;
         var label = label;
         $.ajax({
             url: url,
@@ -234,6 +272,10 @@ $(document).ready(function($){
             }
         });
     }
+
+    /*
+     * Adds label value (type and value passed as parameters)
+     */
 
     function addLabel(label, value) {
         label_data = {'label':label, 'value':value};
@@ -321,11 +363,18 @@ $(function() {
     });
 });
 
+
+//  Flash messages - notification slides up after 5 seconds
 window.setTimeout(function() {
     $(".flash").fadeTo(500, 0).slideUp(500, function(){
         $(this).remove();
     });
 }, 5000);
+
+
+/*
+ * Open Home modal on click event
+ */
 
 $(document).on("click", ".open-homeModal", function () {
     var homeID = $(this).data('id');
@@ -344,6 +393,11 @@ $(document).on("click", ".open-homeModal", function () {
 
 });
 
+
+/*
+ * Delete saved search on click event
+ */
+
 $(document).on("click", ".delsearch", function () {
     var searchID = $(this).data('id');
     $.post('/api/delete/search', {'searchID':searchID}, function(response) {
@@ -354,6 +408,11 @@ $(document).on("click", ".delsearch", function () {
         alert(output);
     }, 'json');
 });
+
+
+/*
+ * Delete saved listing on click event
+ */
 
 $(document).on("click", ".dellisting", function () {
     var listingID = $(this).data('id');
@@ -366,6 +425,10 @@ $(document).on("click", ".dellisting", function () {
     }, 'json');
 });
 
+/*
+ * Retrieve saved search parameters on click event.
+ */
+
 $(document).on("click", ".mysvsearch", function() {
     var searchID = $(this).data('id');
     search_data = {'searchID':searchID};
@@ -373,6 +436,10 @@ $(document).on("click", ".mysvsearch", function() {
         replaceSearch(response.searchJSON);
     }, 'json');
 });
+
+/*
+ * Helper function which autopopulates search form based on saved JSON parameters
+ */
 
 function replaceSearch(searchJSON) {
     clearSearchForm();
@@ -394,6 +461,10 @@ function replaceSearch(searchJSON) {
     });
 }
 
+/*
+ * Get saved searches of user
+ */
+
 function getMySearches() {
     $.ajax({
         url: '/api/get/mySearches',
@@ -413,6 +484,10 @@ function getMySearches() {
         }
     })
 }
+
+/*
+ * Get saved listings of user
+ */
 
 function getMyListings() {
     $.ajax({
@@ -434,6 +509,10 @@ function getMyListings() {
         }
     })
 }
+
+/*
+ * Clear all form elements back to default values.
+ */
 
 function clearSearchForm() {
     document.getElementById("city").value = "Select City";
